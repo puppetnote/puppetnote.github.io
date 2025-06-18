@@ -1,61 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>소개</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>소개 – 현대인형극회</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/slider.js" defer></script>
 </head>
 <body>
-<header>
-    <nav>
-        <a href="index.html">홈</a>
-        <ul>
-            <li><a href="about.html">소개</a>
-                <ul>
-                    <li><a href="about.html#intro">소개</a></li>
-                    <li><a href="about.html#history">연혁</a></li>
-                    <li><a href="about.html#awards">수상내역</a></li>
-                    <li><a href="about.html#media">방송출연</a></li>
-                    <li><a href="about.html#news">보도자료</a></li>
-                </ul>
-            </li>
-            <li><a href="performance.html">공연</a>
-                <ul>
-                    <li><a href="performance.html#puppetcity">Puppet City</a></li>
-                    <li><a href="performance.html#ddkk">덩덩쿵따쿵</a></li>
-                    <li><a href="performance.html#envcamp">환경캠프</a></li>
-                </ul>
-            </li>
-            <li><a href="program.html">프로그램</a></li>
-            <li><a href="gallery.html">갤러리</a>
-                <ul>
-                    <li><a href="gallery.html#custom">주문제작</a></li>
-                    <li><a href="gallery.html#past">과거 인형들</a></li>
-                    <li><a href="gallery.html#overseas">해외공연</a></li>
-                    <li><a href="gallery.html#poster">포스터</a></li>
-                </ul>
-            </li>
-            <li><a href="academy.html">아카데미</a>
-                <ul>
-                    <li><a href="academy.html#program">프로그램</a></li>
-                    <li><a href="academy.html#career">강의경력</a></li>
-                    <li><a href="academy.html#academy">아카데미</a></li>
-                </ul>
-            </li>
-            <li><a href="books.html">출판서적</a></li>
-            <li><a href="contact.html">문의</a></li>
-            <li><a href="news.html">공연소식</a></li>
-            <li><a href="map.html">오시는 길</a></li>
-        </ul>
-    </nav>
-</header>
-<main>
-<div class="content">
-<!-- about.html content here -->
-</div>
+  <header><!-- index와 동일한 네비 구조 --></header>
 
-<footer>
-    <p>© 현대인형극회</p>
-</footer>
+  <main>
+    <!-- 1) 소개 -->
+    <section id="intro" class="tab-content">
+      <h2>소개</h2>
+      <p class="lead">현대인형극회는</p>
+      <p>
+        1961년 KBSTV개국과 함께 창단되어 63년간 장인의 사명감을 가지고 어린이들을 위한 상상력과 창의력 향상을 위한 교육개발과 적용을 위해서 한 길로만 걸어온 현대인형극회는 한국 방송 인형극계를 이끌어 온 산 증인이다.
+      </p>
+      <p>
+        KBS 인형극 ‘부리부리박사’를 비롯해 ‘짱구박사’, ‘TV 유치원’, ‘혼자서도 잘해요’ 등… (중략)
+      </p>
+    </section>
+
+    <!-- 2) 연혁 -->
+    <section id="history" class="tab-content">
+      <h2>연혁</h2>
+      <dl class="timeline">
+        <dt>1961</dt>
+        <dd>- 현대인형극회 창립 KBS TV 개국과 함께 인형극 담당</dd>
+        <dt>1964</dt>
+        <dd>- 셰익스피어 400주년 기념 …</dd>
+        <!-- 이하 동일 패턴 -->
+      </dl>
+    </section>
+
+    <!-- 3) 수상내역 -->
+    <section id="awards" class="tab-content">
+      <h2>수상내역</h2>
+      <dl class="awards">
+        <dt>1976</dt>
+        <dd>KBS-TV 프로그램 평가상 제25회 우수프로그램 평가상 …</dd>
+        <!-- 이하 동일 -->
+      </dl>
+    </section>
+
+    <!-- 4) 방송출연 -->
+    <section id="broadcast" class="tab-content">
+      <h2>방송출연</h2>
+      <div class="slider">
+        <img src="images/broadcast1.jpg" alt="">
+        <img src="images/broadcast2.jpg" alt="">
+        <img src="images/broadcast3.jpg" alt="">
+        <img src="images/broadcast4.jpg" alt="">
+        <img src="images/broadcast5.jpg" alt="">
+        <img src="images/broadcast6.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- 5) 보도자료 -->
+    <section id="press" class="tab-content">
+      <h2>보도자료</h2>
+      <div class="press-gallery">
+        <img src="images/press1.jpg" alt="">
+        <img src="images/press2.jpg" alt="">
+        <img src="images/press3.jpg" alt="">
+      </div>
+    </section>
+  </main>
+
+  <footer><!-- 동일 --></footer>
 </body>
 </html>
