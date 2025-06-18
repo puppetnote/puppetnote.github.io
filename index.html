@@ -13,7 +13,28 @@
     </header>
     <main>
         <h1>현대인형극회</h1>
-        <!-- 페이지 내용 -->
+  <h2>인형극의 세계로 초대합니다</h2>
+  <div class="slideshow-container">
+    <div class="mySlides fade"><img src="images/sample1.jpg" style="width:100%"></div>
+    <div class="mySlides fade"><img src="images/sample2.jpg" style="width:100%"></div>
+    <div class="mySlides fade"><img src="images/sample3.jpg" style="width:100%"></div>
+    <div class="mySlides fade"><img src="images/sample4.jpg" style="width:100%"></div>
+    <div class="mySlides fade"><img src="images/sample5.jpg" style="width:100%"></div>
+  </div>
+  <script>
+    let slideIndex = 0;
+    showSlides();
+    function showSlides() {
+      let slides = document.getElementsByClassName("mySlides");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 4000);
+    }
+  </script>
     </main>
     <footer>
         <p>© 현대인형극회</p>
