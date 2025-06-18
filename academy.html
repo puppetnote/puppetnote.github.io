@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>아카데미 - 현대인형극회</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; }
+        nav { background: #222; padding: 10px; }
+        nav ul { list-style: none; display: flex; padding: 0; margin: 0; }
+        nav li { position: relative; }
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+        }
+        nav li:hover { background: #444; }
+        nav li ul {
+            display: none;
+            position: absolute;
+            background: #444;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+        nav li:hover ul { display: block; }
+        nav li ul li a { padding: 10px; }
+
+        section {
+            padding: 40px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 { font-size: 26px; color: #333; margin-bottom: 20px; }
+        p, li { line-height: 1.6; white-space: pre-line; }
+        .slidebox img {
+            width: 100%;
+            max-height: 400px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#">아카데미</a>
+      <ul>
+        <li><a href="#program">프로그램</a></li>
+        <li><a href="#career">강의경력</a></li>
+        <li><a href="#academy">아카데미</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<section id="program">
+    <h2>아카데미 강사진 - 출강 가능합니다.</h2>
+    <p><strong>현대인형극회 아카데미 원장 여영숙</strong>
+- 장대인형제작 및 연기, 극본각색 배우기
+
+<strong>현대인형극회 예술감독 조용석</strong>
+- 줄 인형 제작 및 연기, 무대 연출법
+
+<strong>현대인형극회 대표 조윤진</strong>
+- 인형 연기법 (손 인형, 그림자 인형제작 연기. 탈 인형 제작 연기)
+
+</p>
+
+<h3>관련 서적</h3>
+<p>출판서적 메뉴에서 자세한 사진과 정보를 확인하실 수 있습니다.</p>
+
+<h3>2025년 아카데미 개인교습 안내</h3>
+<p>각 교습은 수강생이 함께 참여하면 서로의 작품을 보고 배울 점이 많습니다. 개별 시간 조율 가능. 
+1일 최대 3~4시간, 주 몇 회는 강사와 협의.
+
+- 장대인형-인형제작과 연기 수업 
+- 손인형-인형제작과 연기 수업 
+- 탈인형-인형제작과 연기 수업 
+- 그림자-인형제작과 연기 수업 
+- 줄인형-인형제작과 연기 수업 
+
+※ 재료비는 강사비 별도
+
+또한 인형극을 팀으로 제작하고자 하는 분들은 별도의 프로트 강의도 있습니다. (공연 제작 메뉴 참고)
+
+문의: 홈페이지 문의하기 / 전화 / 이메일
+</p>
+</section>
+
+<section id="career">
+    <h2>강의경력</h2>
+    <p><strong>여영숙 원장</strong> (출강 가능)</p>
+    <img src="images/young.jpg" alt="여영숙 인물사진" style="width:300px;margin-bottom:15px;">
+
+    <ul>
+        <li>장로회 신학대학교 인형극 써클강의</li>
+        <li>교육선교 신학대학교 인형극 써클강의</li>
+        <!-- 생략 후 zip에 전체 목록 포함 -->
+    </ul>
+
+    <p><strong>조윤진 대표</strong></p>
+    <img src="images/cho.jpg" alt="조윤진 대표 인물사진" style="width:300px;margin-bottom:15px;">
+    <ul>
+        <li>성신여대 공예과 졸업</li>
+        <li>성균관대학교 대학원 공연예술학과 졸업</li>
+        <!-- 생략 후 zip에 전체 목록 포함 -->
+    </ul>
+</section>
+
+<section id="academy">
+    <h2>아카데미 활동</h2>
+    <div class="slidebox">
+        <img src="images/aca1.jpg" alt="아카데미 사진1">
+        <img src="images/aca2.jpg" alt="아카데미 사진2">
+        <!-- ... up to 12장 -->
+    </div>
+</section>
+
+</body>
+</html>

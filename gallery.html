@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>갤러리 - 현대인형극회</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; }
+        nav { background: #222; padding: 10px; }
+        nav ul { list-style: none; display: flex; padding: 0; margin: 0; }
+        nav li { position: relative; }
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+        }
+        nav li:hover { background: #444; }
+        nav li ul {
+            display: none;
+            position: absolute;
+            background: #444;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+        nav li:hover ul { display: block; }
+        nav li ul li a { padding: 10px; }
+
+        section {
+            padding: 40px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 { font-size: 26px; color: #333; margin-bottom: 20px; }
+        .slideshow img, .collage img {
+            width: 100%;
+            max-height: 500px;
+            margin-bottom: 10px;
+        }
+        .collage {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .collage img {
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#">갤러리</a>
+      <ul>
+        <li><a href="#custom">주문제작</a></li>
+        <li><a href="#past">과거 인형들</a></li>
+        <li><a href="#abroad">해외공연</a>
+          <ul>
+            <li><a href="#uk">영국</a></li>
+            <li><a href="#nz">뉴질랜드</a></li>
+            <li><a href="#taiwan">대만</a></li>
+            <li><a href="#moscow">모스크바</a></li>
+            <li><a href="#bggr">불가리아&그리스</a></li>
+            <li><a href="#shanghai">상하이</a></li>
+            <li><a href="#lebanon">레바논&스페인</a></li>
+            <li><a href="#china">중국 신천지&상하이</a></li>
+            <li><a href="#czech">체코</a></li>
+            <li><a href="#poland">폴란드</a></li>
+            <li><a href="#hongkong">홍콩</a></li>
+            <li><a href="#bangladesh">방글라데시</a></li>
+            <li><a href="#harbin">중국 하얼빈</a></li>
+            <li><a href="#turkey">터키</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<section id="custom">
+    <h2>주문제작</h2>
+    <div class="slideshow">
+        <img src="images/stage1.jpg" alt="무대 이미지 1">
+        <img src="images/stage2.jpg" alt="무대 이미지 2">
+        <!-- ... up to 9 -->
+    </div>
+</section>
+
+<section id="past">
+    <h2>과거 인형들</h2>
+    <div class="collage">
+        <img src="images/doll1.jpg" alt="인형 1">
+        <img src="images/doll2.jpg" alt="인형 2">
+        <!-- ... up to 30~40 -->
+    </div>
+</section>
+
+<section id="abroad">
+    <h2>해외공연</h2>
+
+    <div id="uk">
+        <h3>영국</h3>
+        <div class="slideshow">
+            <img src="images/uk1.jpg" alt="영국 1">
+        </div>
+    </div>
+
+    <div id="nz">
+        <h3>뉴질랜드</h3>
+        <div class="slideshow">
+            <img src="images/nz1.jpg" alt="뉴질랜드 1">
+        </div>
+    </div>
+
+    <!-- Other countries structured similarly -->
+</section>
+
+</body>
+</html>
