@@ -1,83 +1,49 @@
-document.addEventListener("DOMContentLoaded", function() {
-  fetch('menu.html')
-    .then(response => {
-      if (!response.ok) throw new Error('메뉴 파일 불러오기 실패');
-      return response.text();
-    })
-    .then(data => {
-      document.getElementById('nav-placeholder').innerHTML = data;
+// 메뉴 토글 (모바일용)
+const menuToggleBtn = document.querySelector('.menu-toggle');
+const dropdownMenu = document.querySelector('.dropdown-menu');
 
-      initMenu();
-      initSwiper();
-    })
-    .catch(error => {
-      console.error(error);
-    });
+menuToggleBtn.addEventListener('click', () => {
+  dropdownMenu.classList.toggle('active');
+});
 
-  function initMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+// 키보드 접근성 보완: 포커스 시 서브메뉴 열림 유지
+const menuLinks = document.querySelectorAll('.dropdown-menu li > a');
 
-    if(menuToggle && dropdownMenu) {
-      menuToggle.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('active');
-      });
-    }
+menuLinks.forEach(link => {
+  link.addEventListener('focus', () => {
+    closeAllSubmenus();
+    const parentLi = link.parentElement;
+    openSubmenu(parentLi);
+  });
+  link.addEventListener('blur', () => {
+    setTimeout(() => {
+      closeAllSubmenus();
+    }, 200);
+  });
+});
 
-    const items = document.querySelectorAll('.dropdown-menu > li');
-    items.forEach(item => {
-      item.addEventListener('click', e => {
-        if(window.innerWidth <= 768) {
-          e.stopPropagation();
-          items.forEach(i => {
-            if(i !== item) i.classList.remove('active');
-          });
-          item.classList.toggle('active');
-        }
-      });
-    });
-  }
+function openSubmenu(li) {
+  const submenu = li.querySelector('ul');
+  if (submenu) submenu.style.display = 'block';
+}
 
-  function createSwiperControls() {
-    const container = document.querySelector('.swiper-container');
-    if (!container) return;
+function closeAllSubmenus() {
+  document.querySelectorAll('.dropdown-menu ul').forEach(ul => {
+    ul.style.display = 'none';
+  });
+}
 
-    if (!container.querySelector('.swiper-button-next')) {
-      const nextBtn = document.createElement('div');
-      nextBtn.className = 'swiper-button-next';
-      nextBtn.innerHTML = '&#10095;';
-      container.appendChild(nextBtn);
-    }
-    if (!container.querySelector('.swiper-button-prev')) {
-      const prevBtn = document.createElement('div');
-      prevBtn.className = 'swiper-button-prev';
-      prevBtn.innerHTML = '&#10094;';
-      container.appendChild(prevBtn);
-    }
-    if (!container.querySelector('.swiper-pagination')) {
-      const pagination = document.createElement('div');
-      pagination.className = 'swiper-pagination';
-      container.appendChild(pagination);
-    }
-  }
-
-  function initSwiper() {
-    createSwiperControls();
-
-    new Swiper('.swiper-container', {
-      loop: true,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
-  }
+// Swiper 슬라이드 기본 초기화 (모든 슬라이드 페이지에 공통)
+const swiper = new Swiper('.swiper-container', {
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
 });
