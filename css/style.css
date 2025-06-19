@@ -1,3 +1,4 @@
+/* 기본 바디, 헤더, 메뉴 스타일 */
 body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
@@ -5,12 +6,14 @@ body {
     background: #fff;
     color: #333;
 }
+
 header {
     background-color: #111;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
+
 .navbar {
     max-width: 1200px;
     margin: auto;
@@ -18,15 +21,18 @@ header {
     justify-content: space-between;
     padding: 0 20px;
 }
+
 .dropdown-menu {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
 }
+
 .dropdown-menu li {
     position: relative;
 }
+
 .dropdown-menu li a {
     display: block;
     padding: 15px 20px;
@@ -35,9 +41,11 @@ header {
     font-weight: 600;
     font-size: 16px;
 }
+
 .dropdown-menu li a:hover {
     background-color: #444;
 }
+
 .dropdown-menu li ul {
     display: none;
     position: absolute;
@@ -48,52 +56,61 @@ header {
     padding: 0;
     min-width: 180px;
 }
+
 .dropdown-menu li:hover ul {
     display: block;
 }
+
 .dropdown-menu li ul li a {
     padding: 10px 15px;
     color: #fff;
     white-space: nowrap;
 }
+
 h1.title {
     text-align: center;
     font-size: 2.5em;
     margin-top: 20px;
 }
+
 h2.subtitle {
     text-align: center;
     font-size: 1.5em;
     color: #777;
 }
+
+/* 슬라이드 컨테이너 기본 */
 .slideshow-container {
     max-width: 1000px;
     margin: 20px auto;
     position: relative;
+    overflow: hidden;
 }
-.slide {
-    display: none;
-}
-.slide img {
+
+/* swiper 슬라이드 이미지 */
+.swiper-slide img {
     width: 100%;
 }
-.collage img {
-    width: 150px;
-    margin: 5px;
-    display: inline-block;
+
+/* 좌우 네비게이션 버튼 */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  color: white;
+  font-size: 25px;
+  line-height: 40px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  transition: background 0.3s ease;
 }
-.books .book {
-    margin: 20px 0;
-}
-.books .book a {
-    display: inline-block;
-    padding: 10px 15px;
-    margin-top: 8px;
-    background: #111;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-}
-.books .book a:hover {
-    background: #444;
-}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover
