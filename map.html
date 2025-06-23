@@ -1,94 +1,47 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>오시는 길</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    .map-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .map-address {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .map-buttons {
-      margin: 20px 0;
-    }
-    .map-buttons a {
+    .map-button {
       display: inline-block;
-      margin: 0 10px;
-      padding: 10px 20px;
-      background-color: #444;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-    .map-buttons a:hover {
+      margin: 10px;
+      padding: 8px 14px;
       background-color: #0072ce;
-    }
-    .map-info {
-      text-align: left;
-      margin-top: 40px;
-      padding: 0 20px;
-      font-size: 16px;
-      line-height: 1.8;
-      color: #222;
-    }
-    .map-info strong {
-      display: block;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #0072ce;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <header>
-    <div id="nav-placeholder"></div> <!-- 외부 메뉴 불러오기 -->
+    <nav>
+      <ul id="main-menu">
+        <li><a href="about.html">소개</a></li>
+        <li><a href="performance.html">공연</a></li>
+        <li><a href="academy.html">아카데미</a></li>
+        <li><a href="gallery.html">갤러리</a></li>
+        <li><a href="books.html">출판서적</a></li>
+        <li><a href="contact.html">문의</a></li>
+        <li><a href="news.html">공연소식</a></li>
+        <li><a href="map.html">오시는길</a></li>
+      </ul>
+    </nav>
   </header>
-
   <main>
     <h2>현대인형극회 오시는 길</h2>
-    <div class="map-container">
-      <div class="map-address">
-        <strong>주소:</strong> 경기도 고양시 일산서구 송포로197번길 61
-      </div>
-      <div class="map-buttons">
-        <a href="https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?" target="_blank" rel="noopener noreferrer">길찾기</a>
-        <a href="https://map.naver.com/p?title=%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C&lng=126.719223&lat=37.6819916&zoom=15&type=0&c=15.00,0,0,0,dh" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
-      </div>
-      <div class="map-info">
-        <strong>오시는길</strong>
-        3호선 대화역 출구로 나온후 관리자와 연락<br />
-        방문시 사전 시간예약 필수
-
-        <strong>주차정보</strong>
-        대중교통이용.3호선 대화역에서 내린뒤 버스이용
-
-        <strong>전화번호</strong>
-        02-2690-4890
-
-        <strong>사업자정보</strong>
-        상호명현대인형극회
-
-        <strong>이메일</strong>
-        puppetnote@naver.com
-      </div>
-    </div>
+    <p><strong>주소:</strong> 경기도 고양시 일산서구 송포로197번길 61</p>
+    <a class="map-button" href="https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?" target="_blank">길찾기</a>
+    <a class="map-button" href="https://map.naver.com/p?title=%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C&lng=126.719223&lat=37.6819916&zoom=15&type=0&c=15.00,0,0,0,dh" target="_blank">지도에서 보기</a>
+    <p><strong>오시는길</strong><br>3호선 대화역 출구로 나온후 관리자와 연락<br>방문시 사전 시간예약 필수</p>
+    <p><strong>주차정보</strong><br>대중교통이용.3호선 대화역에서 내린뒤 버스이용</p>
+    <p><strong>전화번호</strong><br>02-2690-4890</p>
+    <p><strong>사업자정보</strong><br>상호명현대인형극회</p>
+    <p><strong>이메일</strong><br>puppetnote@naver.com</p>
   </main>
-
-  <footer>
-    <p>© 현대인형극회</p>
-  </footer>
-
-  <script src="js/menu-loader.js"></script>
-  <script src="js/main.js"></script>
+  <footer><p>© 현대인형극회</p></footer>
 </body>
 </html>
