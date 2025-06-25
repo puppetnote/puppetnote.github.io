@@ -6,13 +6,35 @@
   <title>현대인형극회</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    main h1, main h2, main h3 {
+      text-align: center;
+    }
+    .swiper-container {
+      width: 100%;
+      max-width: 960px;
+      height: 480px;
+      margin: 0 auto 2rem auto;
+      position: relative;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #fff;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #000;
+    }
+  </style>
 </head>
 <body>
   <header>
     <div id="nav-placeholder"></div>
   </header>
 
-  <main>
+  <main style="padding-top: 100px;">
     <h1>현대인형극회</h1>
     <h2>인형극의 세계로 초대합니다</h2>
 
@@ -24,16 +46,36 @@
         <div class="swiper-slide"><img src="images/main_slide4.jpg" alt="슬라이드4" /></div>
         <div class="swiper-slide"><img src="images/main_slide5.jpg" alt="슬라이드5" /></div>
       </div>
+      <!-- Navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </main>
 
   <footer>
-    <p>© 현대인형극회</p>
+    <p style="text-align:center">© 현대인형극회</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="js/menu-loader.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Swiper('.swiper-container', {
+        loop: true,
+        speed: 600,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    });
+  </script>
 </body>
 </html>
-
