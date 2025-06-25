@@ -168,7 +168,6 @@ body {
     padding-left: 1rem;
   }
 
-  /* 모바일에서 .open 클래스가 붙은 서브메뉴만 보이게 */
   .dropdown-menu > li > ul:not(.open) {
     display: none;
   }
@@ -229,18 +228,9 @@ body {
   right: calc(50% - 80px);
 }
 
-/* 슬라이드 캡션 */
+/* 슬라이드 캡션 제거 */
 .swiper-slide-caption {
-  text-align: center;
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #0072ce;
-  font-weight: 600;
-  font-size: 0.95rem;
-  user-select: none;
-  pointer-events: none;
+  display: none;
 }
 
 /* 본문 여백 */
@@ -260,3 +250,4 @@ footer {
 h1, h2, h3 {
   text-align: center;
 }
+
