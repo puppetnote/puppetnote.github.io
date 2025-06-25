@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>출판서적</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     .book-button {
       display: inline-block;
@@ -19,30 +19,30 @@
 </head>
 <body>
   <header>
-    <nav>
-      <ul id="main-menu">
-        <li><a href="about.html">소개</a></li>
-        <li><a href="performance.html">공연</a></li>
-        <li><a href="academy.html">아카데미</a></li>
-        <li><a href="gallery.html">갤러리</a></li>
-        <li><a href="books.html">출판서적</a></li>
-        <li><a href="contact.html">문의</a></li>
-        <li><a href="news.html">공연소식</a></li>
-        <li><a href="map.html">오시는길</a></li>
-      </ul>
-    </nav>
+    <div id="nav-placeholder"></div> <!-- menu.html 불러오기 -->
   </header>
-  <main>
+
+  <main style="padding-top: 100px;"> <!-- 메뉴바와 거리 확보 -->
     <h2>출판서적</h2>
     <ul>
-      <li><strong>탈인형 제작법과 연기론</strong><br>탈인형 제작 방법과 탈인형을 이용한 연기론<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661978" target="_blank">탈인형 제작법과 연기론 구입링크</a></li>
-      <li><strong>손인형 제작법과 연기론</strong><br>손인형 제작법과 연기론을 다룬 이론서<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661979" target="_blank">손인형 제작법과 연기론 구입링크</a></li>
-      <li><strong>장대인형 제작법과 연기론</strong><br>장대인형 제작과 연기에 대한 입문서<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661977" target="_blank">장대인형 제작법과 연기론 구입링크</a></li>
-      <li><strong>그림자 인형 제작법과 표현론</strong><br>그림자 인형극을 제작하면서 필요한 배경이나 인물의 예시를 많이 포함하고 있다<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000660954" target="_blank">그림자 인형 제작법과 표현론 구입링크</a></li>
-      <li><strong>내일 수업을 위한 오늘 인형만들기</strong><br>스토리텔링 교수매체로써의 인형 활용서를 담아낸 책<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000660967" target="_blank">내일 수업을 위한 오늘 인형만들기 구입링크</a></li>
-      <li><strong>여영숙 창작 극본집</strong><br>여영숙 창작 극본집 (인형극 역할극 연극대본)<br><a class="book-button" href="https://product.kyobobook.co.kr/detail/S000001155666" target="_blank">여영숙 창작 극본집 구입링크</a></li>
+      <li><strong>탈인형 제작법과 연기론</strong><br>탈인형 제작 방법과 탈인형을 이용한 연기론<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661978" target="_blank">탈인형 제작법과 연기론 구입링크</a></li>
+      <li><strong>손인형 제작법과 연기론</strong><br>손인형 제작법과 연기론을 다룬 이론서<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661979" target="_blank">손인형 제작법과 연기론 구입링크</a></li>
+      <li><strong>장대인형 제작법과 연기론</strong><br>장대인형 제작과 연기에 대한 입문서<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000661977" target="_blank">장대인형 제작법과 연기론 구입링크</a></li>
+      <li><strong>그림자 인형 제작법과 표현론</strong><br>그림자 인형극을 제작하면서 필요한 배경이나 인물의 예시를 많이 포함하고 있다<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000660954" target="_blank">그림자 인형 제작법과 표현론 구입링크</a></li>
+      <li><strong>내일 수업을 위한 오늘 인형만들기</strong><br>스토리텔링 교수매체로써의 인형 활용서를 담아낸 책<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000000660967" target="_blank">내일 수업을 위한 오늘 인형만들기 구입링크</a></li>
+      <li><strong>여영숙 창작 극본집</strong><br>여영숙 창작 극본집 (인형극 역할극 연극대본)<br>
+        <a class="book-button" href="https://product.kyobobook.co.kr/detail/S000001155666" target="_blank">여영숙 창작 극본집 구입링크</a></li>
     </ul>
   </main>
+
   <footer><p>© 현대인형극회</p></footer>
+
+  <!-- 메뉴 불러오기용 JS -->
+  <script src="js/menu-loader.js"></script>
 </body>
 </html>
