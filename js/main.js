@@ -66,17 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
       container.appendChild(prevBtn);
     }
 
-    // alt → 캡션
-    const slides = container.querySelectorAll('.swiper-slide');
-    slides.forEach((slide) => {
-      const img = slide.querySelector('img');
-      if (img && !slide.querySelector('.swiper-slide-caption')) {
-        const caption = document.createElement('div');
-        caption.className = 'swiper-slide-caption';
-        caption.textContent = img.alt || '';
-        slide.appendChild(caption);
-      }
-    });
+    // ✅ 캡션 생성 제거됨 (슬라이드 텍스트 설명 비활성화)
 
     initSwiper(selector);
   });
