@@ -4,8 +4,7 @@ body {
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   background-color: #fff;
   color: #222;
-  text-align: center;
-  font-size: 1.0625rem; /* 기존 1rem에서 1단계 증가 */
+  font-size: 17px; /* 1pt 증가 */
 }
 
 /* 네비게이션 바 */
@@ -40,7 +39,7 @@ body {
   user-select: none;
 }
 
-/* 메뉴 토글 (햄버거 아이콘) */
+/* 메뉴 토글 */
 .menu-toggle {
   font-size: 1.8rem;
   background: none;
@@ -83,7 +82,7 @@ body {
   color: #0072ce;
 }
 
-/* 1차 서브메뉴 */
+/* 서브 메뉴 */
 .dropdown-menu > li > ul {
   position: absolute;
   top: 60px;
@@ -101,7 +100,6 @@ body {
   border-radius: 4px;
 }
 
-/* 1차 서브메뉴 활성화 */
 .dropdown-menu > li:hover > ul,
 .dropdown-menu > li:focus-within > ul {
   opacity: 1;
@@ -110,7 +108,6 @@ body {
   pointer-events: auto;
 }
 
-/* 2차 서브메뉴 */
 .dropdown-menu ul ul {
   top: 0;
   left: 100%;
@@ -119,16 +116,6 @@ body {
   box-shadow: 2px 0 10px rgba(0,0,0,0.1);
 }
 
-/* 2차 서브메뉴 활성화 */
-.dropdown-menu ul li:hover > ul,
-.dropdown-menu ul li:focus-within > ul {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-/* 서브메뉴 아이템 */
 .dropdown-menu ul li a {
   display: block;
   padding: 0.5rem 1.2rem;
@@ -146,12 +133,11 @@ body {
   color: #0072ce;
 }
 
-/* 반응형 - 모바일 */
+/* 반응형 */
 @media (max-width: 992px) {
   .menu-toggle {
     display: block;
   }
-
   .dropdown-menu {
     flex-direction: column;
     background: #fff;
@@ -181,10 +167,10 @@ body {
   }
 }
 
-/* 슬라이드 크기 조절 및 스타일 */
+/* 슬라이드 영역 */
 .swiper-container {
-  max-width: 70vw;
-  height: auto;
+  max-width: 960px;
+  height: 480px;
   margin: 5rem auto 4rem auto;
   position: relative;
 }
@@ -195,12 +181,13 @@ body {
 
 .swiper-slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+/* 슬라이드 버튼 */
 .swiper-button-next,
 .swiper-button-prev {
   color: #0072ce;
@@ -227,24 +214,23 @@ body {
   right: calc(50% - 80px);
 }
 
-.swiper-slide-caption {
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
+/* 슬라이드 제목 가운데 정렬 */
+.swiper-slide-caption,
+h2 {
+  text-align: center;
+  position: relative;
   color: #0072ce;
   font-weight: 600;
   font-size: 0.95rem;
   user-select: none;
-  pointer-events: none;
 }
 
-/* 본문 내용과 메뉴바 사이 간격 */
+/* 본문 여백 */
 main {
-  padding-top: 100px;
+  padding-top: 100px; /* 메뉴바와 본문 사이 간격 5칸 이상 확보 */
 }
 
-/* 푸터 스타일 */
+/* 푸터 */
 footer {
   text-align: center;
   padding: 1.5rem 0;
