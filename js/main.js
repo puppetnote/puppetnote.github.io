@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // 메뉴 토글
   const toggleBtn = document.querySelector('.menu-toggle');
   const mainMenu = document.getElementById('main-menu');
 
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // 모바일 아코디언 메뉴
   const subMenus = document.querySelectorAll('#main-menu li > ul');
   subMenus.forEach((subMenu) => {
     const parentLink = subMenu.parentElement.querySelector('a');
@@ -23,55 +25,59 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  function initSwiper(container) {
-    return new Swiper(container, {
+  // 슬라이드 초기화
+  function initSwiper(containerSelector) {
+    return new Swiper(containerSelector, {
       loop: true,
       speed: 600,
       effect: 'fade',
-      fadeEffect: {
-        crossFade: true,
-      },
+      fadeEffect: { crossFade: true },
       autoplay: {
         delay: 4500,
         disableOnInteraction: false,
       },
       navigation: {
-        nextEl: container + ' .swiper-button-next',
-        prevEl: container + ' .swiper-button-prev',
+        nextEl: containerSelector + ' .swiper-button-next',
+        prevEl: containerSelector + ' .swiper-button-prev',
       },
     });
   }
 
+  // 모든 swiper-container에 대해 자동 적용
   const swiperContainers = document.querySelectorAll('.swiper-container');
   swiperContainers.forEach((container, index) => {
-    // 고유 ID가 없으면 자동 생성
+    // ID 없으면 자동으로 부여
     if (!container.id) {
-      container.id = `swiper-${index}`;
+      container.id = 'auto-swiper-' + index;
     }
 
-    const nextBtn = document.createElement('div');
-    nextBtn.className = 'swiper-button-next';
-    container.appendChild(nextBtn);
+    const selector = '#' + container.id;
 
-    const prevBtn = document.createElement('div');
-    prevBtn.className = 'swiper-button-prev';
-    container.appendChild(prevBtn);
+    // 버튼 없으면 자동 생성
+    if (!container.querySelector('.swiper-button-next')) {
+      const nextBtn = document.createElement('div');
+      nextBtn.className = 'swiper-button-next';
+      container.appendChild(nextBtn);
+    }
 
+    if (!container.querySelector('.swiper-button-prev')) {
+      const prevBtn = document.createElement('div');
+      prevBtn.className = 'swiper-button-prev';
+      container.appendChild(prevBtn);
+    }
+
+    // alt → 캡션
     const slides = container.querySelectorAll('.swiper-slide');
     slides.forEach((slide) => {
       const img = slide.querySelector('img');
-      const altText = img?.alt || '';
-      if (!slide.querySelector('.swiper-slide-caption')) {
+      if (img && !slide.querySelector('.swiper-slide-caption')) {
         const caption = document.createElement('div');
         caption.className = 'swiper-slide-caption';
-        caption.textContent = altText;
+        caption.textContent = img.alt || '';
         slide.appendChild(caption);
       }
     });
 
-    initSwiper('#' + container.id);
+    initSwiper(selector);
   });
 });
-
-
-
