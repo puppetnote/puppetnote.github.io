@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>오시는 길</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     .map-button {
       display: inline-block;
@@ -18,30 +18,25 @@
 </head>
 <body>
   <header>
-    <nav>
-      <ul id="main-menu">
-        <li><a href="about.html">소개</a></li>
-        <li><a href="performance.html">공연</a></li>
-        <li><a href="academy.html">아카데미</a></li>
-        <li><a href="gallery.html">갤러리</a></li>
-        <li><a href="books.html">출판서적</a></li>
-        <li><a href="contact.html">문의</a></li>
-        <li><a href="news.html">공연소식</a></li>
-        <li><a href="map.html">오시는길</a></li>
-      </ul>
-    </nav>
+    <div id="nav-placeholder"></div> <!-- menu.html 로딩 위치 -->
   </header>
-  <main>
+
+  <main style="padding-top: 100px;">
     <h2>현대인형극회 오시는 길</h2>
     <p><strong>주소:</strong> 경기도 고양시 일산서구 송포로197번길 61</p>
     <a class="map-button" href="https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?" target="_blank">길찾기</a>
     <a class="map-button" href="https://map.naver.com/p?title=%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C&lng=126.719223&lat=37.6819916&zoom=15&type=0&c=15.00,0,0,0,dh" target="_blank">지도에서 보기</a>
+
     <p><strong>오시는길</strong><br>3호선 대화역 출구로 나온후 관리자와 연락<br>방문시 사전 시간예약 필수</p>
-    <p><strong>주차정보</strong><br>대중교통이용.3호선 대화역에서 내린뒤 버스이용</p>
+    <p><strong>주차정보</strong><br>대중교통이용. 3호선 대화역에서 내린뒤 버스이용</p>
     <p><strong>전화번호</strong><br>02-2690-4890</p>
-    <p><strong>사업자정보</strong><br>상호명현대인형극회</p>
+    <p><strong>사업자정보</strong><br>상호명 현대인형극회</p>
     <p><strong>이메일</strong><br>puppetnote@naver.com</p>
   </main>
+
   <footer><p>© 현대인형극회</p></footer>
+
+  <!-- 메뉴 로딩 스크립트 -->
+  <script src="js/menu-loader.js"></script>
 </body>
 </html>
