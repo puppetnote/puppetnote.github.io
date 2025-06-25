@@ -9,35 +9,39 @@ fetch("menu.html")
     const toggle = document.querySelector(".menu-toggle");
     const menu = document.getElementById("main-menu");
 
-    // 메뉴 토글 기능
     if (toggle && menu) {
+      // 메뉴 토글 기능
       toggle.addEventListener("click", () => {
         const expanded = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute("aria-expanded", !expanded);
-        menu.classList.toggle("show");
+        menu.classList.toggle("active");
       });
     }
 
-    // 1차 서브메뉴 (예: 소개, 공연, 아카데미 등)
-    const topLevelItems = document.querySelectorAll("#main-menu > li > a[aria-haspopup='true']");
-    topLevelItems.forEach((item) => {
-      const submenu = item.nextElementSibling;
+    // 최상위 드롭다운 메뉴 접근성 및 마우스 호버 효과
+    const topLevelLinks = document.querySelectorAll("#main-menu > li > a[aria-haspopup='true']");
+    topLevelLinks.forEach(link => {
+      const submenu = link.nextElementSibling;
       if (submenu) {
-        item.addEventListener("mouseenter", () => submenu.classList.add("show"));
-        item.parentElement.addEventListener("mouseleave", () => submenu.classList.remove("show"));
-        item.addEventListener("focus", () => submenu.classList.add("show"));
-        item.addEventListener("blur", () => submenu.classList.remove("show"));
+        link.addEventListener("mouseenter", () => submenu.classList.add("show"));
+        link.addEventListener("focus", () => submenu.classList.add("show"));
+        link.parentElement.addEventListener("mouseleave", () => submenu.classList.remove("show"));
+        link.addEventListener("blur", () => submenu.classList.remove("show"));
       }
     });
 
-    // 2차 서브메뉴 (예: 해외공연 아래 국가들)
-    const nestedMenus = document.querySelectorAll("#main-menu li ul li a[aria-haspopup='true']");
-    nestedMenus.forEach((item) => {
-      const submenu = item.nextElementSibling;
+    // 2차 서브메뉴 (예: 해외공연 안의 각 지역 메뉴)
+    const nestedLinks = document.querySelectorAll("#main-menu li ul li a[aria-haspopup='true']");
+    nestedLinks.forEach(link => {
+      const submenu = link.nextElementSibling;
       if (submenu) {
-        item.addEventListener("mouseenter", () => submenu.classList.add("show"));
-        item.parentElement.addEventListener("mouseleave", () => submenu.classList.remove("show"));
+        link.addEventListener("mouseenter", () => submenu.classList.add("show"));
+        link.addEventListener("focus", () => submenu.classList.add("show"));
+        link.parentElement.addEventListener("mouseleave", () => submenu.classList.remove("show"));
+        link.addEventListener("blur", () => submenu.classList.remove("show"));
       }
     });
+  })
+  .catch(error => {
+    console.error("메뉴 로드 실패:", error);
   });
-
