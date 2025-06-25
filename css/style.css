@@ -4,6 +4,8 @@ body {
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   background-color: #fff;
   color: #222;
+  text-align: center;
+  font-size: 1.0625rem; /* 기존 1rem에서 1단계 증가 */
 }
 
 /* 네비게이션 바 */
@@ -159,7 +161,7 @@ body {
     transition: max-height 0.35s ease;
   }
   .dropdown-menu.active {
-    max-height: 1000px; /* 충분히 큰 값 */
+    max-height: 1000px;
   }
   .dropdown-menu > li {
     margin-left: 0;
@@ -181,14 +183,14 @@ body {
 
 /* 슬라이드 크기 조절 및 스타일 */
 .swiper-container {
-  max-width: 85vw;
+  max-width: 70vw;
   height: auto;
-  margin: 3rem auto 4rem auto;
+  margin: 5rem auto 4rem auto;
   position: relative;
 }
 
 .swiper-wrapper {
-  padding-bottom: 40px; /* 슬라이드 아래 버튼, 텍스트 공간 확보 */
+  padding-bottom: 40px;
 }
 
 .swiper-slide img {
@@ -199,7 +201,6 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* 슬라이드 내 네비게이션 버튼 */
 .swiper-button-next,
 .swiper-button-prev {
   color: #0072ce;
@@ -218,7 +219,6 @@ body {
   background-color: #cce0ff;
 }
 
-/* 슬라이드 내 버튼 위치 조정 */
 .swiper-button-prev {
   left: calc(50% - 80px);
 }
@@ -227,7 +227,6 @@ body {
   right: calc(50% - 80px);
 }
 
-/* 슬라이드 제목 중앙 정렬 */
 .swiper-slide-caption {
   position: absolute;
   bottom: 6px;
@@ -242,7 +241,7 @@ body {
 
 /* 본문 내용과 메뉴바 사이 간격 */
 main {
-  padding-top: 70px; /* 메뉴바 높이에 맞춰 공간 확보 */
+  padding-top: 100px;
 }
 
 /* 푸터 스타일 */
