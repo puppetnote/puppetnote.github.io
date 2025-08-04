@@ -1,4 +1,6 @@
-/* 기본 스타일 */
+/* =========================
+   기본 스타일
+========================= */
 body {
   margin: 0;
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
@@ -7,7 +9,9 @@ body {
   font-size: 17px;
 }
 
-/* 네비게이션 바 */
+/* =========================
+   네비게이션 바
+========================= */
 .navbar {
   background-color: #fff;
   border-bottom: 1px solid #ddd;
@@ -50,7 +54,9 @@ body {
   user-select: none;
 }
 
-/* 드롭다운 메뉴 */
+/* =========================
+   드롭다운 메뉴
+========================= */
 .dropdown-menu {
   list-style: none;
   margin: 0;
@@ -82,7 +88,7 @@ body {
   color: #0072ce;
 }
 
-/* 서브 메뉴 (수정 완료) */
+/* 서브 메뉴 */
 .dropdown-menu > li > ul {
   position: absolute;
   top: 60px;
@@ -93,20 +99,19 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(0);
+  transform: translateY(0); /* 끊김 최소화 */
   transition: opacity 0.3s ease;
-  pointer-events: auto;
+  pointer-events: auto; /* 바로 클릭 가능 */
   z-index: 9999;
   border-radius: 4px;
 }
 
-/* hover 시 활성화 */
 .dropdown-menu > li:hover > ul {
   opacity: 1;
   visibility: visible;
 }
 
-/* 하위 메뉴 */
+/* 2단계 서브 메뉴 */
 .dropdown-menu ul ul {
   top: 0;
   left: 100%;
@@ -132,7 +137,9 @@ body {
   color: #0072ce;
 }
 
-/* 반응형 */
+/* =========================
+   반응형 메뉴
+========================= */
 @media (max-width: 992px) {
   .menu-toggle {
     display: block;
@@ -179,7 +186,9 @@ body {
   }
 }
 
-/* 슬라이드 영역 */
+/* =========================
+   슬라이드 영역
+========================= */
 .swiper-container {
   max-width: 960px;
   height: 480px;
@@ -231,12 +240,16 @@ body {
   display: none;
 }
 
-/* 본문 여백 (수정: 메뉴바 겹침 방지) */
+/* =========================
+   본문 영역 (글씨 짤림 방지)
+========================= */
 main {
-  padding-top: 120px; /* 기존 100px → 120px로 수정 */
+  padding-top: 120px; /* 메뉴바 높이 + 여유 */
 }
 
-/* 푸터 */
+/* =========================
+   푸터
+========================= */
 footer {
   text-align: center;
   padding: 1.5rem 0;
@@ -244,7 +257,9 @@ footer {
   color: #666;
 }
 
-/* 제목 정렬 */
+/* =========================
+   제목 정렬
+========================= */
 h1, h2, h3 {
   text-align: center;
 }
