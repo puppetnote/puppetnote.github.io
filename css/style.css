@@ -93,9 +93,9 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(0); /* 이동 최소화로 끊김 방지 */
+  transform: translateY(0);
   transition: opacity 0.3s ease;
-  pointer-events: auto; /* 수정: 바로 클릭 가능 */
+  pointer-events: auto;
   z-index: 9999;
   border-radius: 4px;
 }
@@ -196,4 +196,55 @@ body {
   height: 100%;
   object-fit: contain;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* 슬라이드 버튼 */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #0072ce;
+  width: 40px;
+  height: 40px;
+  top: auto;
+  bottom: 10px;
+  border-radius: 50%;
+  background-color: #e5f0ff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #cce0ff;
+}
+
+.swiper-button-prev {
+  left: calc(50% - 80px);
+}
+
+.swiper-button-next {
+  right: calc(50% - 80px);
+}
+
+/* 슬라이드 캡션 제거 */
+.swiper-slide-caption {
+  display: none;
+}
+
+/* 본문 여백 (수정: 메뉴바 겹침 방지) */
+main {
+  padding-top: 120px; /* 기존 100px → 120px로 수정 */
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* 제목 정렬 */
+h1, h2, h3 {
+  text-align: center;
+}
