@@ -82,7 +82,7 @@ body {
   color: #0072ce;
 }
 
-/* 서브 메뉴 */
+/* 서브 메뉴 (수정 완료) */
 .dropdown-menu > li > ul {
   position: absolute;
   top: 60px;
@@ -93,22 +93,20 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  transform: translateY(0); /* 이동 최소화로 끊김 방지 */
+  transition: opacity 0.3s ease;
+  pointer-events: auto; /* 수정: 바로 클릭 가능 */
   z-index: 9999;
   border-radius: 4px;
 }
 
-/* 서브 메뉴 활성화 - JS에서 .show 추가됨 */
-.dropdown-menu > li > ul.show,
-.dropdown-menu ul li > ul.show {
+/* hover 시 활성화 */
+.dropdown-menu > li:hover > ul {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
 }
 
+/* 하위 메뉴 */
 .dropdown-menu ul ul {
   top: 0;
   left: 100%;
@@ -198,56 +196,4 @@ body {
   height: 100%;
   object-fit: contain;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-/* 슬라이드 버튼 */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #0072ce;
-  width: 40px;
-  height: 40px;
-  top: auto;
-  bottom: 10px;
-  border-radius: 50%;
-  background-color: #e5f0ff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: background-color 0.3s;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background-color: #cce0ff;
-}
-
-.swiper-button-prev {
-  left: calc(50% - 80px);
-}
-
-.swiper-button-next {
-  right: calc(50% - 80px);
-}
-
-/* 슬라이드 캡션 제거 */
-.swiper-slide-caption {
-  display: none;
-}
-
-/* 본문 여백 */
-main {
-  padding-top: 100px;
-}
-
-/* 푸터 */
-footer {
-  text-align: center;
-  padding: 1.5rem 0;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* 제목 정렬 */
-h1, h2, h3 {
-  text-align: center;
-}
-
+  box-shadow: 0 2px 8px rgba(0,0,0
