@@ -134,7 +134,14 @@ const PAGE_HEIGHTS: Record<Page, number> = {
 };
 
 // Menu content heights — gallery2 is taller than one screen
-const MENU_HEIGHTS: Partial<Record<MenuView, number>> = { gallery2: 960 };
+const MENU_HEIGHTS: Partial<Record<MenuView, number>> = {
+  main: 520,
+  intro: 650,
+  perform: 600,
+  academy: 600,
+  gallery1: 590,
+  gallery2: 1000,
+};
 
 // ── Carousel config for sub-pages ──────────────────────────────────────────
 interface CarouselConfig { top: number; left: number; width: number; height: number; images: string[]; }
@@ -263,6 +270,18 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
   const [cMsg, setCMsg] = useState("");
   const [sending, setSending] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
+  const [vw, setVw] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 375,
+  );
+
+  useEffect(() => {
+    const onResize = () => setVw(window.innerWidth);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const scale = vw / 375;
 
   const navigate = useCallback((p: Page) => {
     setHistory(h => [...h, page]);
@@ -378,7 +397,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(106,24,325,47,()=>mv("intro"),"m1")} {B(153,24,325,47,()=>mv("perform"),"m2")}
         {B(200,24,325,47,()=>mv("academy"),"m3")} {B(247,24,325,47,()=>mv("gallery1"),"m4")}
         {B(294,24,325,47,()=>go("books"),"m5")} {B(341,24,325,47,()=>go("news"),"m6")}
-        {B(388,24,325,47,()=>go("map"),"m7")}
+        {B(388,24,325,47,()=>go("map"),"m7")} {B(435,24,325,47,()=>go("contact"),"m8")}
       </>);
 
       case "intro": return (<>{closeBtn}
@@ -389,6 +408,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(292,24,325,47,()=>mv("perform"),"i6")} {B(339,24,325,47,()=>mv("academy"),"i7")}
         {B(386,24,325,47,()=>mv("gallery1"),"i8")} {B(433,24,325,47,()=>go("books"),"i9")}
         {B(480,24,325,47,()=>go("news"),"i10")} {B(527,24,325,47,()=>go("map"),"i11")}
+        {B(574,24,325,47,()=>go("contact"),"i12")}
       </>);
 
       case "perform": return (<>{closeBtn}
@@ -397,7 +417,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(261,24,325,25,()=>go("camp"),"p4")}
         {B(294,24,325,47,()=>mv("academy"),"p5")} {B(341,24,325,47,()=>mv("gallery1"),"p6")}
         {B(388,24,325,47,()=>go("books"),"p7")} {B(435,24,325,47,()=>go("news"),"p8")}
-        {B(482,24,325,47,()=>go("map"),"p9")}
+        {B(482,24,325,47,()=>go("map"),"p9")} {B(529,24,325,47,()=>go("contact"),"p10")}
       </>);
 
       case "academy": return (<>{closeBtn}
@@ -407,6 +427,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(308,24,325,25,()=>go("academygallery"),"a5")}
         {B(341,24,325,47,()=>mv("gallery1"),"a6")} {B(388,24,325,47,()=>go("books"),"a7")}
         {B(435,24,325,47,()=>go("news"),"a8")} {B(482,24,325,47,()=>go("map"),"a9")}
+        {B(529,24,325,47,()=>go("contact"),"a10")}
       </>);
 
       case "gallery1": return (<>{closeBtn}
@@ -415,7 +436,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(305,25,325,25,()=>go("gallerycustom"),"g4")} {B(330,25,325,25,()=>go("galleryold"),"g5")}
         {B(355,25,325,25,()=>mv("gallery2"),"g6")}
         {B(379,24,325,47,()=>go("books"),"g7")} {B(426,24,325,47,()=>go("news"),"g8")}
-        {B(473,24,325,47,()=>go("map"),"g9")}
+        {B(473,24,325,47,()=>go("map"),"g9")} {B(520,24,325,47,()=>go("contact"),"g10")}
       </>);
 
       case "gallery2": { const Bs = 379; return (<>{closeBtn}
@@ -432,7 +453,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(Bs+261,25,325,25,()=>go("turkey"),"h17")} {B(Bs+286,25,325,25,()=>go("bangladesh"),"h18")}
         {B(Bs+311,25,325,25,()=>go("czech"),"h19")} {B(Bs+336,25,325,25,()=>go("harbin"),"h20")}
         {B(768,25,325,47,()=>go("books"),"h22")} {B(815,25,325,47,()=>go("news"),"h23")}
-        {B(862,25,325,47,()=>go("map"),"h24")}
+        {B(862,25,325,47,()=>go("map"),"h24")} {B(909,25,325,47,()=>go("contact"),"h25")}
       </>); }
 
       default: return <>{closeBtn}</>;
@@ -572,31 +593,57 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      {/* Hide scrollbar globally for the scroll container */}
-      <style>{`#scroll-inner::-webkit-scrollbar{display:none}`}</style>
+      <style>{`
+        html, body, #root { height: 100%; margin: 0; overflow: hidden; background: #fff; }
+        #scroll-inner::-webkit-scrollbar { display: none; }
+        .mobile-shell [class*="rounded-[30px]"] {
+          border-radius: 0 !important;
+        }
+        .mobile-shell [class*="border-[#e6e6e6]"] {
+          border-color: transparent !important;
+        }
+      `}</style>
 
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", background: "#f0f2f5", minHeight: "100vh" }}>
-        {/*
-          Fixed 375 × 812 frame — matches Figma frame size.
-          Content taller than 812 px scrolls inside via the inner div.
-        */}
-        <div style={{ position: "relative", width: 375, height: 812, overflow: "hidden" }}>
-
-          {/* Scrollable page content */}
-          <div
-            id="scroll-inner"
-            ref={scrollRef}
-            style={{ width: 375, height: 812, overflowY: "auto", overflowX: "hidden", msOverflowStyle: "none", scrollbarWidth: "none" } as React.CSSProperties}
-          >
-            <div style={{ position: "relative", width: 375, height: pageHeight }}>
-              {/* Figma page at z=0 stacking context — carousel (z≥10) renders above it */}
+      <div
+        className="mobile-shell"
+        style={{
+          width: "100vw",
+          height: "100dvh",
+          overflow: "hidden",
+          background: "#fff",
+          position: "relative",
+        }}
+      >
+        <div
+          id="scroll-inner"
+          ref={scrollRef}
+          style={{
+            width: "100%",
+            height: "100%",
+            overflowY: "auto",
+            overflowX: "hidden",
+            msOverflowStyle: "none",
+            scrollbarWidth: "none",
+          } as React.CSSProperties}
+        >
+          <div style={{ width: "100%", height: pageHeight * scale, position: "relative" }}>
+            <div
+              style={{
+                width: 375,
+                height: pageHeight,
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+                position: "absolute",
+                top: 0,
+                left: 0,
+              }}
+            >
               <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
                 {renderPage()}
               </div>
               {page === "home" && <HomeBannerCarousel />}
               {carouselConfig && (
                 <>
-                  {/* Solid cover — hides Figma's static banner image regardless of stacking context */}
                   <div style={{ position: "absolute", top: carouselConfig.top, left: carouselConfig.left, width: carouselConfig.width, height: carouselConfig.height, borderRadius: 30, background: "white", zIndex: 9 }} />
                   <ImageCarousel config={carouselConfig} pageKey={page} />
                 </>
@@ -605,18 +652,31 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
               {renderContactForm()}
             </div>
           </div>
+        </div>
 
-          {/* Full-screen menu overlay (375 × 812) */}
-          {menuView !== "closed" && (
-            <div style={{ position: "absolute", inset: 0, zIndex: 100, overflowY: "auto" }} onClick={closeMenu}>
-              <div style={{ position: "relative", width: 375, height: menuH }} onClick={e => e.stopPropagation()}>
+        {menuView !== "closed" && (
+          <div
+            style={{ position: "absolute", inset: 0, zIndex: 100, overflowY: "auto", background: "#fff" }}
+            onClick={closeMenu}
+          >
+            <div style={{ width: "100%", height: menuH * scale, position: "relative" }} onClick={(e) => e.stopPropagation()}>
+              <div
+                style={{
+                  width: 375,
+                  height: menuH,
+                  transform: `scale(${scale})`,
+                  transformOrigin: "top left",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                }}
+              >
                 {renderMenuScreen()}
                 {renderMenuOverlays()}
               </div>
             </div>
-          )}
-
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

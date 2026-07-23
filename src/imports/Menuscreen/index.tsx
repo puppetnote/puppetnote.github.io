@@ -104,6 +104,14 @@ function DarkModeSetting6() {
   );
 }
 
+function DarkModeSetting7() {
+  return (
+    <div className="absolute border-b border-black border-solid h-[47px] left-[24px] overflow-clip top-[435px] w-[325px]" data-name="Dark Mode Setting">
+      <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold','Noto_Sans_KR:Bold',sans-serif] font-semibold leading-[normal] left-0 not-italic text-[14px] text-black top-[15px] whitespace-nowrap">문의하기</p>
+    </div>
+  );
+}
+
 export default function Menuscreen() {
   return (
     <div className="bg-white border border-[#e6e6e6] border-solid overflow-clip relative rounded-[30px] size-full" data-name="menuscreen">
@@ -115,6 +123,7 @@ export default function Menuscreen() {
       <DarkModeSetting4 />
       <DarkModeSetting5 />
       <DarkModeSetting6 />
+      <DarkModeSetting7 />
       <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold','Noto_Sans_KR:Bold',sans-serif] font-semibold leading-[normal] left-[132px] not-italic text-[#334d99] text-[20px] top-[34px] whitespace-nowrap">현대인형극회</p>
     </div>
   );
