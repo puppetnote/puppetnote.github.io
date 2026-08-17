@@ -5,6 +5,10 @@ import { sendInquiry } from "../emailjsConfig";
 import { HISTORY_PC, AWARDS_PC, CAREER1_PC, CAREER2_PC } from "./contentData";
 import imgYeo from "../../imports/AcademyCareer-2/6c1e4515edb1f78c3034e94316a446f7b97a7b43.png";
 import imgCho from "../../imports/AcademyCareer-2/b5dfa36a6e4cd6b283a11f3c8cedc693da6ed10a.png";
+import {
+  OVERSEAS_PAGES,
+  OVERSEAS_TITLES,
+} from "../../imports/OverseasCareer";
 import "./desktop.css";
 
 const img = (name: string) => `/images/${name}.jpg`;
@@ -65,7 +69,7 @@ const ACTIVE_SECTION: Partial<Record<Page, NavSection>> = {
   about: "intro", history: "intro", awards: "intro", broadcast: "intro", press: "intro",
   performance: "perform", puppetcity: "perform", ddkt: "perform", camp: "perform",
   program: "academy", career: "academy", career1: "academy", career2: "academy", academygallery: "academy",
-  gallerycustom: "gallery", galleryold: "gallery",
+  gallerycustom: "gallery", galleryold: "gallery", overseas: "gallery",
   uk: "gallery", nz: "gallery", taiwan: "gallery", moscow: "gallery", lebanon: "gallery",
   bulgaria: "gallery", xinshanghai: "gallery", poland: "gallery", shanghai: "gallery",
   hongkong: "gallery", turkey: "gallery", czech: "gallery", bangladesh: "gallery",
@@ -620,6 +624,35 @@ export default function DesktopApp({ page, setPage }: Props) {
                 </button>
               </figure>
             ))}
+          </div>
+        </TitlePage>
+      );
+    }
+
+    if (page === "overseas") {
+      return (
+        <TitlePage title="해외공연">
+          <p className="desktop-body center" style={{ fontSize: 16, marginTop: -8 }}>
+            사진을 클릭하시면 공연 확인이 가능합니다
+          </p>
+          <div className="desktop-career-grid">
+            {OVERSEAS_PAGES.map((country) => {
+              const image = OVERSEAS[country].images[0];
+              return (
+                <button
+                  key={country}
+                  className="desktop-career-card"
+                  onClick={() => go(country)}
+                >
+                  <div className="photo">
+                    {image
+                      ? <img src={image} alt={OVERSEAS_TITLES[country]} />
+                      : <span className="desktop-placeholder">이미지 준비 중</span>}
+                  </div>
+                  <span className="label">{OVERSEAS_TITLES[country]}</span>
+                </button>
+              );
+            })}
           </div>
         </TitlePage>
       );

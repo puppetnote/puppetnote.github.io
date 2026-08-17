@@ -78,6 +78,10 @@ import Ddkt from "../imports/Ddkt";
 import Camp from "../imports/Camp";
 import PerformanceCareer from "../imports/PerformanceCareer";
 import imgPerformanceBack from "../imports/PerformanceCareer/back.svg";
+import OverseasCareer, {
+  OVERSEAS_PAGES,
+  type OverseasPage,
+} from "../imports/OverseasCareer";
 import Program from "../imports/Program";
 import AcademyCareer from "../imports/AcademyCareer";
 import AcademyCareerNew from "../imports/AcademyCareer-2";
@@ -131,7 +135,7 @@ const PAGE_HEIGHTS: Record<Page, number> = {
   puppetcity: 1450, ddkt: 1300, camp: 2200,
   program: 960, career: 960, career1: 2400, career2: 1650,
   // galleryold: 마지막 썸네일이 1836px에서 끝난다 (아래 여백 64px)
-  academygallery: 812, gallerycustom: 812, galleryold: 1900,
+  academygallery: 812, gallerycustom: 812, galleryold: 1900, overseas: 1360,
   uk: 812, nz: 812, taiwan: 812, moscow: 812, lebanon: 812,
   bulgaria: 812, xinshanghai: 812, poland: 812, shanghai: 812,
   hongkong: 812, turkey: 812, czech: 812, bangladesh: 812, harbin: 812,
@@ -333,6 +337,26 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
     setPage("performance", { replace: true });
   }, [setPage]);
 
+  const openOverseasDetailFromMenu = useCallback((detail: OverseasPage) => {
+    // 메뉴 엔트리를 해외공연 선택 화면으로 교체한 뒤 상세 엔트리를 쌓는다.
+    // 상세에서 브라우저 뒤로가기를 누르면 국가 선택 화면이 나타난다.
+    menuEntryRef.current = false;
+    setMenuView("closed");
+    setPage("overseas", { replace: true });
+    setPage(detail);
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [setPage]);
+
+  const backToOverseas = useCallback(() => {
+    const state = window.history.state as HistoryState | null;
+    if (state?.from === "overseas") {
+      window.history.back();
+      return;
+    }
+    // 공유 링크 등 선택 화면을 거치지 않은 상세 진입도 국가 선택 화면으로 보낸다.
+    setPage("overseas", { replace: true });
+  }, [setPage]);
+
   const openMenu = useCallback(() => {
     // 메뉴 열림도 히스토리 엔트리로 만들어 두면 뒤로가기가 사이트를 벗어나지 않고 메뉴만 닫는다.
     if (!menuEntryRef.current) {
@@ -458,6 +482,12 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
           onSelect={(detail) => navigate(detail)}
         />
       );
+      case "overseas":       return (
+        <OverseasCareer
+          onBack={() => setPage("home", { replace: true })}
+          onSelect={(detail) => navigate(detail)}
+        />
+      );
       case "puppetcity":     return <Puppetcity />;
       case "ddkt":           return <Ddkt />;
       case "camp":           return <Camp />;
@@ -567,13 +597,13 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         {B(305,25,325,25,()=>go("gallerycustom"),"h4")} {B(330,25,325,25,()=>go("galleryold"),"h5")}
         {/* 해외공연 재클릭 → gallery1로 복귀 */}
         {B(355,25,325,25,()=>mv("gallery1"),"h6")}
-        {B(Bs+11,25,325,25,()=>go("uk"),"h7")} {B(Bs+36,25,325,25,()=>go("nz"),"h8")}
-        {B(Bs+61,25,325,25,()=>go("taiwan"),"h9")} {B(Bs+86,25,325,25,()=>go("moscow"),"h10")}
-        {B(Bs+111,25,325,25,()=>go("lebanon"),"h11")} {B(Bs+136,25,325,25,()=>go("bulgaria"),"h12")}
-        {B(Bs+161,25,325,25,()=>go("xinshanghai"),"h13")} {B(Bs+186,25,325,25,()=>go("poland"),"h14")}
-        {B(Bs+211,25,325,25,()=>go("shanghai"),"h15")} {B(Bs+236,25,325,25,()=>go("hongkong"),"h16")}
-        {B(Bs+261,25,325,25,()=>go("turkey"),"h17")} {B(Bs+286,25,325,25,()=>go("bangladesh"),"h18")}
-        {B(Bs+311,25,325,25,()=>go("czech"),"h19")} {B(Bs+336,25,325,25,()=>go("harbin"),"h20")}
+        {B(Bs+11,25,325,25,()=>openOverseasDetailFromMenu("uk"),"h7")} {B(Bs+36,25,325,25,()=>openOverseasDetailFromMenu("nz"),"h8")}
+        {B(Bs+61,25,325,25,()=>openOverseasDetailFromMenu("taiwan"),"h9")} {B(Bs+86,25,325,25,()=>openOverseasDetailFromMenu("moscow"),"h10")}
+        {B(Bs+111,25,325,25,()=>openOverseasDetailFromMenu("lebanon"),"h11")} {B(Bs+136,25,325,25,()=>openOverseasDetailFromMenu("bulgaria"),"h12")}
+        {B(Bs+161,25,325,25,()=>openOverseasDetailFromMenu("xinshanghai"),"h13")} {B(Bs+186,25,325,25,()=>openOverseasDetailFromMenu("poland"),"h14")}
+        {B(Bs+211,25,325,25,()=>openOverseasDetailFromMenu("shanghai"),"h15")} {B(Bs+236,25,325,25,()=>openOverseasDetailFromMenu("hongkong"),"h16")}
+        {B(Bs+261,25,325,25,()=>openOverseasDetailFromMenu("turkey"),"h17")} {B(Bs+286,25,325,25,()=>openOverseasDetailFromMenu("bangladesh"),"h18")}
+        {B(Bs+311,25,325,25,()=>openOverseasDetailFromMenu("czech"),"h19")} {B(Bs+336,25,325,25,()=>openOverseasDetailFromMenu("harbin"),"h20")}
         {B(768,25,325,47,()=>go("books"),"h22")} {B(815,25,325,47,()=>go("news"),"h23")}
         {B(862,25,325,47,()=>go("map"),"h24")} {B(909,25,325,47,()=>go("contact"),"h25")}
       </>); }
@@ -609,7 +639,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
       </>
     );
 
-    if (page === "performance") {
+    if (page === "performance" || page === "overseas") {
       return (
         <>
           {/* Figma 화면의 화살표는 PerformanceCareer 컴포넌트가 직접 처리한다. */}
@@ -625,6 +655,43 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
             type="button"
             onClick={backToPerformance}
             aria-label="공연 목록으로 돌아가기"
+            style={{
+              position: "absolute",
+              top: 8,
+              left: 0,
+              width: 48,
+              height: 48,
+              zIndex: 40,
+              border: "none",
+              background: "transparent",
+              padding: 0,
+              cursor: "pointer",
+            }}
+          >
+            <img
+              alt=""
+              src={imgPerformanceBack}
+              style={{
+                position: "absolute",
+                top: 15,
+                left: 14,
+                width: 15.574,
+                height: 15.164,
+              }}
+            />
+          </button>
+          {btn(18, 110, 160, 40, () => go("home"))}
+        </>
+      );
+    }
+
+    if ((OVERSEAS_PAGES as readonly Page[]).includes(page)) {
+      return (
+        <>
+          <button
+            type="button"
+            onClick={backToOverseas}
+            aria-label="해외공연 목록으로 돌아가기"
             style={{
               position: "absolute",
               top: 8,
