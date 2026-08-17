@@ -9,7 +9,7 @@ function Group() {
           <img alt="" className="absolute h-[108.36%] left-[-0.14%] max-w-none top-[0.05%] w-full" src={imgRectangle423} />
         </div>
       </div>
-      <div className="absolute bg-white h-[33.412px] left-[101.32px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[380.17px] w-[186.711px]" />
+      <div className="overflow-hidden absolute bg-white h-[33.412px] left-[101.32px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[380.17px] w-[186.711px]" />
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold h-[20.561px] justify-center leading-[0] left-[195.11px] not-italic text-[15px] text-black text-center top-[397.31px] tracking-[-0.15px] uppercase w-[90.316px]">
         <p className="leading-[1.5]">조윤진 대표</p>
       </div>

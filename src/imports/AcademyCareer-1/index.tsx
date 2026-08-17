@@ -18,7 +18,7 @@ function Group1() {
   return (
     <div className="absolute contents left-[63px] top-[180px]">
       <Group />
-      <div className="absolute bg-[#ffe38e] h-[39px] left-[81px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[448px] w-[215px]" />
+      <div className="overflow-hidden absolute bg-[#ffe38e] h-[39px] left-[81px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[448px] w-[215px]" />
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold h-[24px] justify-center leading-[0] left-[189px] not-italic text-[15px] text-black text-center top-[468px] tracking-[-0.15px] uppercase w-[104px]">
         <p className="leading-[1.5]">여영숙 원장</p>
       </div>
@@ -43,7 +43,7 @@ function Group3() {
           <img alt="" className="absolute h-[108.36%] left-[-0.14%] max-w-none top-[0.05%] w-full" src={imgRectangle423} />
         </div>
       </div>
-      <div className="absolute bg-white h-[39px] left-[83px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[833px] w-[215px]" />
+      <div className="overflow-hidden absolute bg-white h-[39px] left-[83px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[833px] w-[215px]" />
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold h-[24px] justify-center leading-[0] left-[191px] not-italic text-[15px] text-black text-center top-[853px] tracking-[-0.15px] uppercase w-[104px]">
         <p className="leading-[1.5]">조윤진 대표</p>
       </div>

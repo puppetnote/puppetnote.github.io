@@ -1,4 +1,3 @@
-import svgPaths from "./svg-r7l2gvjjp0";
 import imgBannerContainer from "./4e8962e6f2ba890793d915f103eb59875767a316.png";
 
 function Group() {
@@ -24,19 +23,19 @@ function Group() {
 
 function BannerContainer() {
   return (
-    <div className="absolute h-[207px] left-[16px] rounded-[30px] top-[101px] w-[342px]" data-name="Banner Container">
-      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[30px] size-full" src={imgBannerContainer} />
+    <div className="overflow-hidden absolute h-[207px] left-[16px] rounded-[30px] top-[101px] w-[342px]" data-name="Banner Container">
+      <img alt="" className="overflow-hidden absolute inset-0 max-w-none object-cover pointer-events-none rounded-[30px] size-full" src={imgBannerContainer} />
       <div className="overflow-clip relative rounded-[inherit] size-full">
         <Group />
       </div>
-      <div aria-hidden className="absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
+      <div aria-hidden className="overflow-hidden absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
     </div>
   );
 }
 
 export default function Ddkt() {
   return (
-    <div className="bg-white border border-[#e6e6e6] border-solid overflow-clip relative rounded-[30px] size-full" data-name="ddkt">
+    <div className="bg-white relative size-full" data-name="ddkt">
       <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold','Noto_Sans_KR:Bold',sans-serif] font-semibold leading-[normal] left-[131px] not-italic text-[#334d99] text-[20px] top-[24px] whitespace-nowrap">현대인형극회</p>
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Merriweather:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold justify-center leading-[0] left-[186.5px] text-[15px] text-black text-center top-[354.5px] tracking-[-0.15px] uppercase w-[107px]" style={{ fontVariationSettings: '"wdth" 100' }}>
         <p className="leading-[1.5]">덩덩쿵따쿵</p>
@@ -88,11 +87,6 @@ export default function Ddkt() {
           {`또한 엿장수는 인형극 전문 성우이자 각종 미디어 방송매체에서 활발하게 활동 하고 있는 김영진 성우의 목소리이고 `}
         </p>
         <p className="leading-[27px]">국악 음악은 경기도립국악단이, 음악은 박병오 씨가 작곡하였습니다.</p>
-      </div>
-      <div className="absolute h-[14.047px] left-[14px] top-[28.64px] w-[15.574px]" data-name="Vector">
-        <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15.5741 14.0467">
-          <path d={svgPaths.p24b99b00} fill="var(--fill-0, #395DC7)" id="Vector" />
-        </svg>
       </div>
     </div>
   );

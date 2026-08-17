@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MobileApp from "./MobileApp";
 import DesktopApp from "./desktop/DesktopApp";
-import type { Page } from "./types";
+import { useHistoryRouter } from "./useHistoryRouter";
 
 function useIsDesktop(breakpoint = 1024) {
   const [isDesktop, setIsDesktop] = useState(() =>
@@ -21,11 +21,11 @@ function useIsDesktop(breakpoint = 1024) {
 
 export default function App() {
   const isDesktop = useIsDesktop(1024);
-  const [page, setPage] = useState<Page>("home");
+  const { page, navigate } = useHistoryRouter();
 
   if (isDesktop) {
-    return <DesktopApp page={page} setPage={setPage} />;
+    return <DesktopApp page={page} setPage={navigate} />;
   }
 
-  return <MobileApp page={page} setPage={setPage} />;
+  return <MobileApp page={page} setPage={navigate} />;
 }

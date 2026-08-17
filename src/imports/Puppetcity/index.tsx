@@ -1,4 +1,3 @@
-import svgPaths from "./svg-spevospukw";
 import imgBannerContainer from "./f4671f89ff7cfa69715f25c2b2c5adee1973aebf.png";
 
 function Group() {
@@ -24,19 +23,19 @@ function Group() {
 
 function BannerContainer() {
   return (
-    <div className="absolute h-[207px] left-[16px] rounded-[30px] top-[101px] w-[342px]" data-name="Banner Container">
-      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[30px] size-full" src={imgBannerContainer} />
+    <div className="overflow-hidden absolute h-[207px] left-[16px] rounded-[30px] top-[101px] w-[342px]" data-name="Banner Container">
+      <img alt="" className="overflow-hidden absolute inset-0 max-w-none object-cover pointer-events-none rounded-[30px] size-full" src={imgBannerContainer} />
       <div className="overflow-clip relative rounded-[inherit] size-full">
         <Group />
       </div>
-      <div aria-hidden className="absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
+      <div aria-hidden className="overflow-hidden absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
     </div>
   );
 }
 
 export default function Puppetcity() {
   return (
-    <div className="bg-white border border-[#e6e6e6] border-solid overflow-clip relative rounded-[30px] size-full" data-name="puppetcity">
+    <div className="bg-white relative size-full" data-name="puppetcity">
       <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold','Noto_Sans_KR:Bold',sans-serif] font-semibold leading-[normal] left-[131px] not-italic text-[#334d99] text-[20px] top-[24px] whitespace-nowrap">현대인형극회</p>
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Merriweather:Bold',sans-serif] font-bold justify-center leading-[0] left-[186.5px] text-[15px] text-black text-center top-[354.5px] tracking-[-0.15px] uppercase w-[107px]" style={{ fontVariationSettings: '"wdth" 100' }}>
         <p className="leading-[1.5]">Puppet City</p>
@@ -93,11 +92,6 @@ export default function Puppetcity() {
           <br aria-hidden />
           {`어린이의 전유물에서 탈피하여 어른과 아이가 함께 공유 할 수 있는 무대, 그리고 한국인 뿐만 아니라 세계시장에서도 손색이 없는 무대를 위해 현대인형극회와 "줄 인형 콘서트"는 계속 될것입니다.`}
         </p>
-      </div>
-      <div className="absolute h-[14.047px] left-[14px] top-[28.64px] w-[15.574px]" data-name="Vector">
-        <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15.5741 14.0467">
-          <path d={svgPaths.p24b99b00} fill="var(--fill-0, #395DC7)" id="Vector" />
-        </svg>
       </div>
     </div>
   );

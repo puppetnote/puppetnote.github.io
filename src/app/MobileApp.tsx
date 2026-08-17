@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { Page } from "./types";
+import type { HistoryState, Navigate } from "./useHistoryRouter";
 import { sendInquiry } from "./emailjsConfig";
 
 // ── Slide images for home banner ────────────────────────────────────────────
@@ -75,6 +76,8 @@ import Press1 from "../imports/Press-1";
 import Puppetcity from "../imports/Puppetcity";
 import Ddkt from "../imports/Ddkt";
 import Camp from "../imports/Camp";
+import PerformanceCareer from "../imports/PerformanceCareer";
+import imgPerformanceBack from "../imports/PerformanceCareer/back.svg";
 import Program from "../imports/Program";
 import AcademyCareer from "../imports/AcademyCareer";
 import AcademyCareerNew from "../imports/AcademyCareer-2";
@@ -82,7 +85,8 @@ import AcademyCareer1 from "../imports/AcademyCareer1";
 import AcademyCareer2 from "../imports/AcademyCareer2";
 import AcademyGallery from "../imports/AcademyGallery";
 import GalleryCustom from "../imports/GalleryCustom";
-import GalleryOld from "../imports/GalleryOld";
+import GalleryOld, { GALLERY_OLD_GRID, GALLERY_OLD_PHOTOS } from "../imports/GalleryOld";
+import GalleryOldViewer from "./GalleryOldViewer";
 import UkPage from "../imports/Uk";
 import NzPage from "../imports/Nz";
 import Taiwan from "../imports/Taiwan";
@@ -122,10 +126,12 @@ type MenuView =
 // ── Page heights (total content height) ────────────────────────────────────
 // Pages at 812 = single-screen Figma frame, no scroll needed
 const PAGE_HEIGHTS: Record<Page, number> = {
-  home: 1520, about: 1400, history: 6500, awards: 2200,
-  broadcast: 812, press: 1120, puppetcity: 812, ddkt: 812, camp: 812,
+  home: 1540, about: 1400, history: 6500, awards: 2200,
+  broadcast: 812, press: 1120, performance: 812,
+  puppetcity: 1450, ddkt: 1300, camp: 2200,
   program: 960, career: 960, career1: 2400, career2: 1650,
-  academygallery: 812, gallerycustom: 812, galleryold: 3000,
+  // galleryold: 마지막 썸네일이 1836px에서 끝난다 (아래 여백 64px)
+  academygallery: 812, gallerycustom: 812, galleryold: 1900,
   uk: 812, nz: 812, taiwan: 812, moscow: 812, lebanon: 812,
   bulgaria: 812, xinshanghai: 812, poland: 812, shanghai: 812,
   hongkong: 812, turkey: 812, czech: 812, bangladesh: 812, harbin: 812,
@@ -147,7 +153,7 @@ const MENU_HEIGHTS: Partial<Record<MenuView, number>> = {
 interface CarouselConfig { top: number; left: number; width: number; height: number; images: string[]; }
 const OB = { top: 146, left: 16, width: 342, height: 236 };
 const CAROUSEL_CONFIGS: Partial<Record<Page, CarouselConfig>> = {
-  broadcast:      { top: 101, left: 16, width: 342, height: 207, images: BROADCAST_SLIDES },
+  broadcast:      { top: 146, left: 16, width: 342, height: 236, images: BROADCAST_SLIDES },
   puppetcity:     { top: 101, left: 16, width: 342, height: 207, images: PUPPETCITY_SLIDES },
   ddkt:           { top: 101, left: 16, width: 342, height: 207, images: DDKT_SLIDES },
   camp:           { top: 101, left: 16, width: 342, height: 207, images: CAMP_SLIDES },
@@ -252,16 +258,20 @@ const BASE_INPUT: React.CSSProperties = {
 // ── Main App ────────────────────────────────────────────────────────────────
 interface MobileAppProps {
   page?: Page;
-  setPage?: (p: Page) => void;
+  setPage?: Navigate;
 }
 
 export default function MobileApp({ page: pageProp, setPage: setPageProp }: MobileAppProps) {
   const [pageInternal, setPageInternal] = useState<Page>("home");
   const page = pageProp ?? pageInternal;
   const setPage = setPageProp ?? setPageInternal;
-  const [history, setHistory] = useState<Page[]>([]);
   const [menuView, setMenuView] = useState<MenuView>("closed");
   const scrollRef = useRef<HTMLDivElement>(null);
+  // 우리가 push한 "메뉴 열림" 히스토리 엔트리를 들고 있는지 여부
+  const menuEntryRef = useRef(false);
+  // 과거 인형들 확대 보기
+  const [photoIndex, setPhotoIndex] = useState<number | null>(null);
+  const photoEntryRef = useRef(false);
 
   // Contact form
   const [cName, setCName] = useState("");
@@ -273,9 +283,15 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
   const [vw, setVw] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth : 375,
   );
+  const [vh, setVh] = useState(() =>
+    typeof window !== "undefined" ? window.innerHeight : 812,
+  );
 
   useEffect(() => {
-    const onResize = () => setVw(window.innerWidth);
+    const onResize = () => {
+      setVw(window.innerWidth);
+      setVh(window.innerHeight);
+    };
     onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -284,24 +300,123 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
   const scale = vw / 375;
 
   const navigate = useCallback((p: Page) => {
-    setHistory(h => [...h, page]);
-    setPage(p);
+    // 메뉴에서 진입할 때는 메뉴 엔트리를 상세페이지 엔트리로 교체한다.
+    // 그래야 상세페이지에서 뒤로가기를 눌렀을 때 메뉴가 아니라 직전 페이지로 돌아간다.
+    const replace = menuEntryRef.current || photoEntryRef.current;
+    menuEntryRef.current = false;
+    photoEntryRef.current = false;
+    setPhotoIndex(null);
+    setPage(p, { replace });
     setMenuView("closed");
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [setPage]);
+
+  const openPerformanceDetailFromMenu = useCallback((
+    detail: "puppetcity" | "ddkt" | "camp",
+  ) => {
+    // 메뉴 엔트리를 공연 선택 화면으로 교체한 뒤 상세 엔트리를 push한다.
+    // 상세에서 브라우저 뒤로가기를 누르면 공연 선택 화면이 나타난다.
+    menuEntryRef.current = false;
+    setMenuView("closed");
+    setPage("performance", { replace: true });
+    setPage(detail);
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [setPage]);
+
+  const backToPerformance = useCallback(() => {
+    const state = window.history.state as HistoryState | null;
+    if (state?.from === "performance") {
+      window.history.back();
+      return;
+    }
+    // 공유 링크 등 선택 화면을 거치지 않은 상세 진입도 안전하게 선택 화면으로 보낸다.
+    setPage("performance", { replace: true });
+  }, [setPage]);
+
+  const openMenu = useCallback(() => {
+    // 메뉴 열림도 히스토리 엔트리로 만들어 두면 뒤로가기가 사이트를 벗어나지 않고 메뉴만 닫는다.
+    if (!menuEntryRef.current) {
+      window.history.pushState(
+        { page, menu: "main" } as HistoryState,
+        "",
+        window.location.href,
+      );
+      menuEntryRef.current = true;
+    }
+    setMenuView("main");
   }, [page]);
 
-  const goBack = useCallback(() => {
-    if (history.length > 0) {
-      setPage(history[history.length - 1]);
-      setHistory(h => h.slice(0, -1));
-      if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  // 메뉴 안에서의 화면 전환은 엔트리를 쌓지 않고 교체 → 뒤로가기 한 번에 메뉴가 닫힌다.
+  const mv = useCallback((view: MenuView) => {
+    if (menuEntryRef.current) {
+      window.history.replaceState(
+        { page, menu: view } as HistoryState,
+        "",
+        window.location.href,
+      );
     }
-  }, [history]);
+    setMenuView(view);
+  }, [page]);
+
+  const closeMenu = useCallback(() => {
+    if (menuEntryRef.current) {
+      menuEntryRef.current = false;
+      // 엔트리를 소비해야 히스토리에 죽은 메뉴 엔트리가 남지 않는다. popstate에서 메뉴가 닫힌다.
+      window.history.back();
+      return;
+    }
+    setMenuView("closed");
+  }, []);
+
+  // 확대 보기도 히스토리 엔트리로 만들어 두면 뒤로가기가 페이지를 벗어나지 않고 사진만 닫는다.
+  // 화살표로 사진을 넘길 때는 엔트리를 쌓지 않고 교체한다.
+  const showPhoto = useCallback((index: number) => {
+    const state: HistoryState = { page, photo: index };
+    if (photoEntryRef.current) {
+      window.history.replaceState(state, "", window.location.href);
+    } else {
+      window.history.pushState(state, "", window.location.href);
+      photoEntryRef.current = true;
+    }
+    setPhotoIndex(index);
+  }, [page]);
+
+  const closePhoto = useCallback(() => {
+    if (photoEntryRef.current) {
+      // photoEntryRef / photoIndex는 popstate에서 정리한다.
+      window.history.back();
+      return;
+    }
+    setPhotoIndex(null);
+  }, []);
 
   const go = navigate;
-  const mv = setMenuView;
-  const openMenu = () => setMenuView("main");
-  const closeMenu = () => setMenuView("closed");
+
+  // 뒤로/앞으로 이동 시 메뉴·확대 보기 오버레이 상태를 히스토리 엔트리에 맞춰 되돌린다.
+  useEffect(() => {
+    const onPopState = (e: PopStateEvent) => {
+      const state = e.state as HistoryState | null;
+      const menu = state?.menu as MenuView | undefined;
+      menuEntryRef.current = Boolean(menu);
+      setMenuView(menu ?? "closed");
+
+      const photo = typeof state?.photo === "number" ? state.photo : null;
+      photoEntryRef.current = photo !== null;
+      setPhotoIndex(photo);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  // 뒤로가기로 페이지가 바뀐 경우에도 스크롤을 위로 되돌린다.
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+    // 다른 페이지로 이동하면 확대 보기는 무조건 닫는다.
+    if (page !== "galleryold") {
+      photoEntryRef.current = false;
+      setPhotoIndex(null);
+    }
+  }, [page]);
 
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -337,6 +452,12 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
       case "awards":         return <Awards />;
       case "broadcast":      return <Broadcast />;
       case "press":          return <Press1 />;
+      case "performance":    return (
+        <PerformanceCareer
+          onBack={() => setPage("home", { replace: true })}
+          onSelect={(detail) => navigate(detail)}
+        />
+      );
       case "puppetcity":     return <Puppetcity />;
       case "ddkt":           return <Ddkt />;
       case "camp":           return <Camp />;
@@ -413,8 +534,9 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
 
       case "perform": return (<>{closeBtn}
         {B(106,24,325,47,()=>mv("intro"),"p0")} {B(153,24,325,47,()=>mv("perform"),"p1")}
-        {B(211,24,325,25,()=>go("puppetcity"),"p2")} {B(236,24,325,25,()=>go("ddkt"),"p3")}
-        {B(261,24,325,25,()=>go("camp"),"p4")}
+        {B(211,24,325,25,()=>openPerformanceDetailFromMenu("puppetcity"),"p2")}
+        {B(236,24,325,25,()=>openPerformanceDetailFromMenu("ddkt"),"p3")}
+        {B(261,24,325,25,()=>openPerformanceDetailFromMenu("camp"),"p4")}
         {B(294,24,325,47,()=>mv("academy"),"p5")} {B(341,24,325,47,()=>mv("gallery1"),"p6")}
         {B(388,24,325,47,()=>go("books"),"p7")} {B(435,24,325,47,()=>go("news"),"p8")}
         {B(482,24,325,47,()=>go("map"),"p9")} {B(529,24,325,47,()=>go("contact"),"p10")}
@@ -470,27 +592,112 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
       <>
         {/* Hamburger — left=16 top=29 in Figma */}
         {btn(20, 10, 36, 36, openMenu)}
-        {/* 소개 보기 pill: left=17 top=783 w=119 h=27 */}
-        {btn(783, 17, 119, 27, () => go("about"))}
-        {/* 출판서적 section: image frame top=900 + chevron top=964 */}
-        {btn(870, 16, 355, 200, () => go("books"))}
+        {/* Logo → home */}
+        {btn(18, 110, 160, 40, () => go("home"))}
+        {/* 소개 보기 pill (+0.5cm / 19px from overlap fix) */}
+        {btn(802, 17, 119, 27, () => go("about"))}
+        {/* 출판서적 section */}
+        {btn(889, 16, 355, 200, () => go("books"))}
         {/* 오시는길 title area */}
-        {btn(1110, 16, 200, 50, () => go("map"))}
+        {btn(1129, 16, 200, 50, () => go("map"))}
         {/* 길찾기 pill */}
-        {btn(1219, 17, 119, 36, () => window.open("https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?", "_blank"))}
+        {btn(1238, 17, 119, 36, () => window.open("https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?", "_blank"))}
         {/* 지도에서 보기 pill */}
-        {btn(1219, 156, 119, 36, () => window.open("https://naver.me/FgEoAAF5", "_blank"))}
-        {/* 문의 section: title top=1348 */}
-        {btn(1330, 16, 355, 80, () => go("contact"))}
+        {btn(1238, 156, 119, 36, () => window.open("https://naver.me/FgEoAAF5", "_blank"))}
+        {/* 문의 section */}
+        {btn(1349, 16, 355, 80, () => go("contact"))}
       </>
     );
 
+    if (page === "performance") {
+      return (
+        <>
+          {/* Figma 화면의 화살표는 PerformanceCareer 컴포넌트가 직접 처리한다. */}
+          {btn(18, 110, 160, 40, () => go("home"))}
+        </>
+      );
+    }
+
+    if (page === "puppetcity" || page === "ddkt" || page === "camp") {
+      return (
+        <>
+          <button
+            type="button"
+            onClick={backToPerformance}
+            aria-label="공연 목록으로 돌아가기"
+            style={{
+              position: "absolute",
+              top: 8,
+              left: 0,
+              width: 48,
+              height: 48,
+              zIndex: 40,
+              border: "none",
+              background: "transparent",
+              padding: 0,
+              cursor: "pointer",
+            }}
+          >
+            <img
+              alt=""
+              src={imgPerformanceBack}
+              style={{
+                position: "absolute",
+                top: 15,
+                left: 14,
+                width: 15.574,
+                height: 15.164,
+              }}
+            />
+          </button>
+          {btn(18, 110, 160, 40, () => go("home"))}
+        </>
+      );
+    }
+
     return (
       <>
-        {/* Back (puppet icon) — left≈14 top≈31 */}
-        {btn(18, 8, 36, 36, goBack)}
-        {/* Hamburger right side */}
-        <button onClick={openMenu} style={{ position: "absolute", top: 18, right: 8, width: 36, height: 36, opacity: 0, cursor: "pointer", zIndex: 40, border: "none", background: "transparent", padding: 0 }} />
+        {/* Cover Figma back-arrow + show same hamburger as home */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 18,
+            left: 6,
+            width: 40,
+            height: 36,
+            background: "#fff",
+            zIndex: 39,
+          }}
+        />
+        <button
+          type="button"
+          onClick={openMenu}
+          aria-label="메뉴"
+          style={{
+            position: "absolute",
+            top: 20,
+            left: 10,
+            width: 36,
+            height: 36,
+            zIndex: 40,
+            border: "none",
+            background: "transparent",
+            padding: 0,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden>
+            <line x1="1" y1="1" x2="21" y2="1" stroke="black" strokeWidth="2" strokeLinecap="round" />
+            <line x1="1" y1="8" x2="21" y2="8" stroke="black" strokeWidth="2" strokeLinecap="round" />
+            <line x1="1" y1="15" x2="21" y2="15" stroke="black" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </button>
+        {/* Logo → home */}
+        {btn(18, 110, 160, 40, () => go("home"))}
         {/* AcademyCareer-2 card click areas: first card top=186, second top=576 */}
         {page === "career" && <>{btn(186,55,266,340,()=>go("career1"))}{btn(576,55,266,340,()=>go("career2"))}</>}
         {/* Books purchase link buttons (positions from Figma) */}
@@ -502,6 +709,28 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
           {btn(829, 49, 109, 23, () => window.open("https://product.kyobobook.co.kr/detail/S000000660967", "_blank"))}
           {btn(829, 228, 109, 19, () => window.open("https://product.kyobobook.co.kr/detail/S000001155666", "_blank"))}
         </>}
+        {/* 과거 인형들 썸네일 — 누르면 확대 보기가 열린다 */}
+        {page === "galleryold" && GALLERY_OLD_PHOTOS.map((_, i) => (
+          <button
+            key={`doll-${i}`}
+            type="button"
+            onClick={() => showPhoto(i)}
+            aria-label={`과거 인형 사진 ${i + 1} 크게 보기`}
+            style={{
+              position: "absolute",
+              top: GALLERY_OLD_GRID.top + Math.floor(i / GALLERY_OLD_GRID.columns) * GALLERY_OLD_GRID.stepY,
+              left: GALLERY_OLD_GRID.left + (i % GALLERY_OLD_GRID.columns) * GALLERY_OLD_GRID.stepX,
+              width: GALLERY_OLD_GRID.width,
+              height: GALLERY_OLD_GRID.height,
+              opacity: 0,
+              zIndex: 40,
+              border: "none",
+              background: "transparent",
+              padding: 0,
+              cursor: "pointer",
+            }}
+          />
+        ))}
         {/* Map page navigation buttons */}
         {page === "map" && <>
           {btn(392, 58, 119, 36, () => window.open("https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?", "_blank"))}
@@ -589,6 +818,9 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
   const pageHeight = PAGE_HEIGHTS[page];
   const carouselConfig = CAROUSEL_CONFIGS[page];
   const menuH = MENU_HEIGHTS[menuView] ?? 812;
+  const photoOpen = page === "galleryold" && photoIndex !== null;
+  // 화면이 낮으면 260px 프레임이 잘리므로 Figma의 145px 대신 세로 중앙에 놓는다.
+  const photoTop = Math.max(8, Math.min(GALLERY_OLD_GRID.top, (vh / scale - 260) / 2));
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -596,16 +828,24 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
       <style>{`
         html, body, #root { height: 100%; margin: 0; overflow: hidden; background: #fff; }
         #scroll-inner::-webkit-scrollbar { display: none; }
-        .mobile-shell [class*="rounded-[30px]"] {
+        /* 전체화면 페이지 프레임만 모서리 제거 — 배너/썸네일 둥글기는 유지 */
+        .mobile-shell [class*="size-full"][class*="rounded-[30px]"] {
           border-radius: 0 !important;
         }
-        .mobile-shell [class*="border-[#e6e6e6]"] {
+        .mobile-shell [class*="size-full"][class*="border-[#e6e6e6]"] {
           border-color: transparent !important;
+        }
+        .mobile-shell [data-name="Banner Container"] {
+          overflow: hidden !important;
+        }
+        /* 확대 보기 중에는 뒤쪽 썸네일만 흐리게 — 제목/헤더는 그대로 둔다 */
+        .mobile-shell.photo-open [data-name="Banner Container"] {
+          opacity: 0.6;
         }
       `}</style>
 
       <div
-        className="mobile-shell"
+        className={photoOpen ? "mobile-shell photo-open" : "mobile-shell"}
         style={{
           width: "100vw",
           height: "100dvh",
@@ -620,7 +860,7 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
           style={{
             width: "100%",
             height: "100%",
-            overflowY: "auto",
+            overflowY: photoOpen ? "hidden" : "auto",
             overflowX: "hidden",
             msOverflowStyle: "none",
             scrollbarWidth: "none",
@@ -653,6 +893,31 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
             </div>
           </div>
         </div>
+
+        {/* 확대 보기 — 스크롤 위치와 무관하게 화면 안에 머물도록 뷰포트에 띄운다 */}
+        {photoOpen && photoIndex !== null && (
+          <div style={{ position: "absolute", inset: 0, zIndex: 60 }}>
+            <div
+              style={{
+                width: 375,
+                height: vh / scale,
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+                position: "absolute",
+                top: 0,
+                left: 0,
+              }}
+            >
+              <GalleryOldViewer
+                photos={GALLERY_OLD_PHOTOS}
+                index={photoIndex}
+                top={photoTop}
+                onSelect={showPhoto}
+                onClose={closePhoto}
+              />
+            </div>
+          </div>
+        )}
 
         {menuView !== "closed" && (
           <div

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import type { Page, NavSection } from "../types";
+import type { Navigate } from "../useHistoryRouter";
 import { sendInquiry } from "../emailjsConfig";
 import { HISTORY_PC, AWARDS_PC, CAREER1_PC, CAREER2_PC } from "./contentData";
 import imgYeo from "../../imports/AcademyCareer-2/6c1e4515edb1f78c3034e94316a446f7b97a7b43.png";
@@ -62,7 +63,7 @@ const BOOK_LINKS = [
 
 const ACTIVE_SECTION: Partial<Record<Page, NavSection>> = {
   about: "intro", history: "intro", awards: "intro", broadcast: "intro", press: "intro",
-  puppetcity: "perform", ddkt: "perform", camp: "perform",
+  performance: "perform", puppetcity: "perform", ddkt: "perform", camp: "perform",
   program: "academy", career: "academy", career1: "academy", career2: "academy", academygallery: "academy",
   gallerycustom: "gallery", galleryold: "gallery",
   uk: "gallery", nz: "gallery", taiwan: "gallery", moscow: "gallery", lebanon: "gallery",
@@ -311,13 +312,14 @@ function CareerDetail({
 
 interface Props {
   page: Page;
-  setPage: (p: Page) => void;
+  setPage: Navigate;
 }
 
 export default function DesktopApp({ page, setPage }: Props) {
   const [mega, setMega] = useState(false);
   const [abroadOpen, setAbroadOpen] = useState(false);
   const [bookStart, setBookStart] = useState(0);
+  const [dollIndex, setDollIndex] = useState<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
   const [cName, setCName] = useState("");
@@ -333,6 +335,24 @@ export default function DesktopApp({ page, setPage }: Props) {
     setAbroadOpen(false);
     window.scrollTo(0, 0);
   };
+
+  // 뒤로/앞으로 이동으로 페이지가 바뀐 경우에도 상단부터 보여준다.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setDollIndex(null);
+  }, [page]);
+
+  // 확대 보기는 Esc / 좌우 방향키로도 조작한다.
+  useEffect(() => {
+    if (dollIndex === null) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDollIndex(null);
+      if (e.key === "ArrowLeft") setDollIndex((i) => (i === null ? i : (i - 1 + DOLL_SLIDES.length) % DOLL_SLIDES.length));
+      if (e.key === "ArrowRight") setDollIndex((i) => (i === null ? i : (i + 1) % DOLL_SLIDES.length));
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [dollIndex]);
 
   const active = ACTIVE_SECTION[page] ?? null;
 
@@ -467,6 +487,34 @@ export default function DesktopApp({ page, setPage }: Props) {
       return <TitlePage title="보도자료" images={PRESS_SLIDES} />;
     }
 
+    if (page === "performance") {
+      return (
+        <TitlePage title="공연">
+          <p className="desktop-body center" style={{ fontSize: 16, marginTop: -8 }}>
+            사진을 클릭하시면 공연 확인이 가능합니다
+          </p>
+          <div className="desktop-career-grid">
+            {[
+              { page: "puppetcity" as const, title: "PUPPET CITY", image: PUPPETCITY_SLIDES[0] },
+              { page: "ddkt" as const, title: "덩덩쿵따쿵", image: DDKT_SLIDES[0] },
+              { page: "camp" as const, title: "띠용이와 떠나는 환경캠프", image: CAMP_SLIDES[0] },
+            ].map((performance) => (
+              <button
+                key={performance.page}
+                className="desktop-career-card"
+                onClick={() => go(performance.page)}
+              >
+                <div className="photo">
+                  <img src={performance.image} alt={performance.title} />
+                </div>
+                <span className="label">{performance.title}</span>
+              </button>
+            ))}
+          </div>
+        </TitlePage>
+      );
+    }
+
     if (page === "puppetcity") {
       return (
         <TitlePage title="Puppet City" images={PUPPETCITY_SLIDES}>
@@ -557,10 +605,19 @@ export default function DesktopApp({ page, setPage }: Props) {
     if (page === "galleryold") {
       return (
         <TitlePage title="과거인형들">
-          <div className="desktop-gallery-grid">
-            {DOLL_SLIDES.map((src) => (
+          <p className="desktop-body center" style={{ fontSize: 16, marginTop: -8 }}>
+            사진을 클릭하시면 크게 보실 수 있습니다
+          </p>
+          <div className={dollIndex === null ? "desktop-gallery-grid" : "desktop-gallery-grid dimmed"}>
+            {DOLL_SLIDES.map((src, i) => (
               <figure key={src}>
-                <img src={src} alt="" loading="lazy" />
+                <button
+                  type="button"
+                  onClick={() => setDollIndex(i)}
+                  aria-label={`과거 인형 사진 ${i + 1} 크게 보기`}
+                >
+                  <img src={src} alt="" loading="lazy" />
+                </button>
               </figure>
             ))}
           </div>
@@ -790,6 +847,36 @@ export default function DesktopApp({ page, setPage }: Props) {
         )}
       </header>
       {renderPage()}
+
+      {page === "galleryold" && dollIndex !== null && (
+        <div className="desktop-lightbox">
+          <button
+            type="button"
+            className="backdrop"
+            onClick={() => setDollIndex(null)}
+            aria-label="확대 보기 닫기"
+          />
+          <button
+            type="button"
+            className="arrow prev"
+            onClick={() => setDollIndex((dollIndex - 1 + DOLL_SLIDES.length) % DOLL_SLIDES.length)}
+            aria-label="이전 사진"
+          >
+            ‹
+          </button>
+          <figure>
+            <img src={DOLL_SLIDES[dollIndex]} alt={`과거 인형 사진 ${dollIndex + 1}`} />
+          </figure>
+          <button
+            type="button"
+            className="arrow next"
+            onClick={() => setDollIndex((dollIndex + 1) % DOLL_SLIDES.length)}
+            aria-label="다음 사진"
+          >
+            ›
+          </button>
+        </div>
+      )}
     </div>
   );
 }

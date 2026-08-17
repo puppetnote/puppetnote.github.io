@@ -400,6 +400,39 @@ function BannerContainer39() {
   );
 }
 
+/** 썸네일 격자 좌표 (375px 프레임 기준) */
+export const GALLERY_OLD_GRID = {
+  columns: 3,
+  left: 19,
+  top: 145,
+  width: 101,
+  height: 105,
+  stepX: 117,
+  stepY: 122,
+};
+
+/**
+ * 확대 보기용 사진 목록. 위 컴포넌트의 선언 순서는 Figma 레이어 순서라서
+ * 511px 행이 뒤쪽에 있다. 화살표로 넘길 때는 눈에 보이는 순서(위→아래,
+ * 왼쪽→오른쪽)를 따라야 하므로 여기서 다시 정렬한다.
+ */
+export const GALLERY_OLD_PHOTOS = [
+  imgBannerContainer, imgBannerContainer1, imgBannerContainer2,
+  imgBannerContainer3, imgBannerContainer4, imgBannerContainer5,
+  imgBannerContainer6, imgBannerContainer7, imgBannerContainer8,
+  imgBannerContainer15, imgBannerContainer16, imgBannerContainer17,
+  imgBannerContainer9, imgBannerContainer10, imgBannerContainer11,
+  imgBannerContainer12, imgBannerContainer13, imgBannerContainer14,
+  imgBannerContainer18, imgBannerContainer19, imgBannerContainer20,
+  imgBannerContainer21, imgBannerContainer22, imgBannerContainer23,
+  imgBannerContainer24, imgBannerContainer25, imgBannerContainer26,
+  imgBannerContainer27, imgBannerContainer28, imgBannerContainer29,
+  imgBannerContainer30, imgBannerContainer31, imgBannerContainer32,
+  imgBannerContainer33, imgBannerContainer34, imgBannerContainer35,
+  imgBannerContainer36, imgBannerContainer37, imgBannerContainer38,
+  imgBannerContainer39,
+];
+
 export default function GalleryOld() {
   return (
     <div className="bg-white border border-[#e6e6e6] border-solid overflow-clip relative rounded-[30px] size-full" data-name="gallery_old">

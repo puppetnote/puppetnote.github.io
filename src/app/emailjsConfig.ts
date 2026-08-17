@@ -34,14 +34,34 @@ function getEmailJs() {
   return api;
 }
 
-/** Sends inquiry mail via EmailJS CDN (template To: puppetnote@naver.com). */
+/**
+ * Sends inquiry mail via EmailJS.
+ * Template variables used: from_name, phone, reply_to, email, message
+ * (email === reply_to for templates that use {{email}})
+ *
+ * Also embeds phone/email into `message` so they appear even if the
+ * EmailJS dashboard template only shows {{from_name}} / {{message}}.
+ */
 export async function sendInquiry(payload: InquiryPayload): Promise<void> {
-  const params: Record<string, string> = {
-    from_name: payload.from_name,
-    reply_to: payload.reply_to,
-    message: payload.message,
-  };
-  if (payload.phone) params.phone = payload.phone;
+  const phone = (payload.phone ?? "").trim();
+  const email = payload.reply_to.trim();
+  const name = payload.from_name.trim();
+  const body = payload.message.trim();
 
-  await getEmailJs().send(EMAILJS.serviceId, EMAILJS.templateId, params);
+  const messageWithContact = [
+    body,
+    "",
+    "----------",
+    `성함: ${name}`,
+    `전화번호: ${phone || "(미입력)"}`,
+    `이메일: ${email}`,
+  ].join("\n");
+
+  await getEmailJs().send(EMAILJS.serviceId, EMAILJS.templateId, {
+    from_name: name,
+    phone: phone || "(미입력)",
+    reply_to: email,
+    email,
+    message: messageWithContact,
+  });
 }

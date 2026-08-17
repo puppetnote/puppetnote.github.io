@@ -3,9 +3,9 @@ import imgBannerContainer from "./61aa345b64adcd07029cde4c24e995e2b9ef92e6.png";
 
 function BannerContainer() {
   return (
-    <div className="absolute h-[236px] left-[16px] pointer-events-none rounded-[30px] top-[146px] w-[342px]" data-name="Banner Container">
-      <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[30px] size-full" src={imgBannerContainer} />
-      <div aria-hidden className="absolute border border-[#e6e6e6] border-solid inset-0 rounded-[30px]" />
+    <div className="overflow-hidden absolute h-[236px] left-[16px] pointer-events-none rounded-[30px] top-[146px] w-[342px]" data-name="Banner Container">
+      <img alt="" className="overflow-hidden absolute inset-0 max-w-none object-cover rounded-[30px] size-full" src={imgBannerContainer} />
+      <div aria-hidden className="overflow-hidden absolute border border-[#e6e6e6] border-solid inset-0 rounded-[30px]" />
     </div>
   );
 }

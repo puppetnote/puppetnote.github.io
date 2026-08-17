@@ -38,7 +38,7 @@ function Group1() {
   return (
     <div className="absolute contents left-[93px] top-[125px]">
       <Group />
-      <div className="absolute bg-[#ffe38e] h-[38.822px] left-[143.77px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[400.18px] w-[153.899px]" />
+      <div className="overflow-hidden absolute bg-[#ffe38e] h-[38.822px] left-[143.77px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[400.18px] w-[153.899px]" />
       <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold h-[24px] justify-center leading-[0] left-[221px] not-italic text-[15px] text-black text-center top-[421px] tracking-[-0.15px] uppercase w-[104px]">
         <p className="leading-[1.5]">여영숙 원장</p>
       </div>

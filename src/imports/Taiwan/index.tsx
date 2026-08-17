@@ -16,14 +16,14 @@ function Group() {
 
 function BannerContainer() {
   return (
-    <div className="absolute h-[236px] left-[16px] rounded-[30px] top-[146px] w-[342px]" data-name="Banner Container">
+    <div className="overflow-hidden absolute h-[236px] left-[16px] rounded-[30px] top-[146px] w-[342px]" data-name="Banner Container">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[30px]">
         <img alt="" className="absolute h-[144.92%] left-[0.05%] max-w-none top-[0.14%] w-full" src={imgBannerContainer} />
       </div>
       <div className="overflow-clip relative rounded-[inherit] size-full">
         <Group />
       </div>
-      <div aria-hidden className="absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
+      <div aria-hidden className="overflow-hidden absolute border border-[#e6e6e6] border-solid inset-0 pointer-events-none rounded-[30px]" />
     </div>
   );
 }
