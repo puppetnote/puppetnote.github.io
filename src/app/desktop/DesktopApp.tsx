@@ -49,7 +49,7 @@ const OVERSEAS: Record<string, { title: string; images: string[] }> = {
   turkey: { title: "터키", images: imgs("turkey", 5) },
   bangladesh: { title: "방글라데시", images: imgs("bangladesh", 2) },
   czech: { title: "체코", images: imgs("czech", 2) },
-  harbin: { title: "하얼빈", images: imgs("harbin", 5) },
+  harbin: { title: "하얼빈", images: imgs("harbin", 2) },
 };
 
 const NAV_DIRS =

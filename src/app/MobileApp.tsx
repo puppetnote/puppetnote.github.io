@@ -68,7 +68,7 @@ const SHANGHAI_SLIDES = imgs("shanghai", 5);
 const HONGKONG_SLIDES = imgs("hongkong", 1);
 const CZECH_SLIDES = imgs("czech", 2);
 const BANGLADESH_SLIDES = imgs("bangladesh", 2);
-const HARBIN_SLIDES = imgs("harbin", 5);
+const HARBIN_SLIDES = imgs("harbin", 2);
 
 // ── Figma page imports (read-only) ──────────────────────────────────────────
 import HomeScreen from "../imports/HomeScreen";
