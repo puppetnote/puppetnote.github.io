@@ -132,7 +132,7 @@ type MenuView =
 // ── Page heights (total content height) ────────────────────────────────────
 // Pages at 812 = single-screen Figma frame, no scroll needed
 const PAGE_HEIGHTS: Record<Page, number> = {
-  home: 1540, about: 1400, history: 6500, awards: 2200,
+  home: 1540, about: 1460, history: 6500, awards: 2200,
   broadcast: 812, press: 1120, performance: 812,
   puppetcity: 1450, ddkt: 1340, camp: 2200,
   program: 960, career: 960, career1: 2400, career2: 1650,

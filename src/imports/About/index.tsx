@@ -67,6 +67,7 @@ export default function About() {
         <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">{`이를 바탕으로 2011년 까지 국립 국악원에서 `}</p>
         <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">{`“덩덩쿵따쿵”, “피리인형 떼루떼루”를 공연하여 `}</p>
         <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">{`국악인형극이라는 새로운 장르를 정착시켰다. `}</p>
+        <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">{`그리고 국내 인형극 최초 ! 2006 영국프린지페스티벌 한달간 기획공연을 성황리에 진행하였다.`}</p>
         <p className="leading-[27px] mb-0">​</p>
         <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">2010 고양 호수 예술 축제 61개 공연 중 최우수상을 수상 하면서 많은 사랑을 받았고</p>
         <p className="font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[27px] mb-0">{`2011년과 2012년은 2년간 전국 문예회관  우수공연에 선정되었다.`}</p>
