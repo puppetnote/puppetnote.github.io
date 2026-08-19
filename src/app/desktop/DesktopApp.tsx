@@ -30,7 +30,7 @@ const CUSTOM_SLIDES = imgsList([
   "custom1", "custom3", "custom4", "custom5", "custom6", "custom7", "custom8", "custom9",
 ]);
 const DOLL_SLIDES = imgs("doll", 40);
-const BROADCAST_SLIDES = imgs("broadcast", 6);
+const BROADCAST_SLIDES = imgs("broadcast", 13);
 const PRESS_SLIDES = imgs("press", 3);
 const PUPPETCITY_SLIDES = imgs("puppetcity", 10);
 const DDKT_SLIDES = imgs("ddkt", 10);

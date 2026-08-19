@@ -45,7 +45,11 @@ const imgs = (prefix: string, count: number) => Array.from({ length: count }, (_
 const imgsList = (names: string[]) => names.map(n => img(n));
 
 const HOME_SLIDES = [imgSlide1, imgSlide2, imgSlide3, imgSlide4, imgSlide5];
-const BROADCAST_SLIDES = [imgBroadcast1, imgBroadcast2, imgBroadcast3, imgBroadcast4, imgBroadcast5, imgBroadcast6];
+const BROADCAST_SLIDES = [
+  imgBroadcast1, imgBroadcast2, imgBroadcast3, imgBroadcast4, imgBroadcast5, imgBroadcast6,
+  img("broadcast7"), img("broadcast8"), img("broadcast9"), img("broadcast10"),
+  img("broadcast11"), img("broadcast12"), img("broadcast13"),
+];
 const PUPPETCITY_SLIDES = [imgPuppetcity1, imgPuppetcity2, imgPuppetcity3, imgPuppetcity4, imgPuppetcity5, imgPuppetcity6, imgPuppetcity7, imgPuppetcity8, imgPuppetcity9, imgPuppetcity10];
 const DDKT_SLIDES = [imgDdkt1, imgDdkt2, imgDdkt3, imgDdkt4, imgDdkt5, imgDdkt6, imgDdkt7, imgDdkt8, img("ddkt9"), img("ddkt10")];
 const CAMP_SLIDES = imgs("camp", 10);
