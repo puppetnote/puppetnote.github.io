@@ -36,8 +36,8 @@ const PUPPETCITY_SLIDES = imgs("puppetcity", 10);
 const DDKT_SLIDES = imgs("ddkt", 10);
 
 const OVERSEAS: Record<string, { title: string; images: string[] }> = {
-  uk: { title: "영국", images: imgs("uk", 7) },
-  nz: { title: "뉴질랜드", images: [] },
+  uk: { title: "영국 프린지 페스티벌", images: imgs("uk", 14) },
+  nz: { title: "뉴질랜드", images: imgs("nz", 12) },
   taiwan: { title: "대만", images: imgs("taiwan", 2) },
   moscow: { title: "모스크바", images: imgs("moscow", 9) },
   lebanon: { title: "레바논", images: imgs("lebanon", 13) },
@@ -46,7 +46,7 @@ const OVERSEAS: Record<string, { title: string; images: string[] }> = {
   poland: { title: "폴란드", images: imgs("poland", 4) },
   shanghai: { title: "상하이", images: imgs("shanghai", 5) },
   hongkong: { title: "홍콩", images: imgs("hongkong", 1) },
-  turkey: { title: "터키", images: [] },
+  turkey: { title: "터키", images: imgs("turkey", 5) },
   bangladesh: { title: "방글라데시", images: imgs("bangladesh", 2) },
   czech: { title: "체코", images: imgs("czech", 2) },
   harbin: { title: "하얼빈", images: imgs("harbin", 5) },

@@ -49,8 +49,8 @@ export default function Uk() {
         </div>
       </div>
       <BannerContainer />
-      <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Merriweather:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold justify-center leading-[0] left-[186.5px] text-[15px] text-black text-center top-[105.5px] tracking-[-0.15px] uppercase w-[117px]" style={{ fontVariationSettings: '"wdth" 100' }}>
-        <p className="leading-[1.5]">영국</p>
+      <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Merriweather:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold justify-center leading-[0] left-[186.5px] text-[15px] text-black text-center top-[105.5px] tracking-[-0.15px] uppercase w-[240px]" style={{ fontVariationSettings: '"wdth" 100' }}>
+        <p className="leading-[1.5] whitespace-nowrap">영국 프린지 페스티벌</p>
       </div>
       <div className="absolute h-[15.164px] left-[14px] top-[31px] w-[15.574px]" data-name="Vector">
         <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15.5741 15.1635">

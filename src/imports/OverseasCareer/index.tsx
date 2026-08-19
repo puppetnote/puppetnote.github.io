@@ -53,7 +53,7 @@ export const OVERSEAS_PAGES: readonly OverseasPage[] = [
 ];
 
 export const OVERSEAS_TITLES: Record<OverseasPage, string> = {
-  uk: "영국",
+  uk: "영국 프린지 페스티벌",
   nz: "뉴질랜드",
   taiwan: "대만",
   moscow: "모스크바",
@@ -71,6 +71,7 @@ export const OVERSEAS_TITLES: Record<OverseasPage, string> = {
 
 const CARD_IMAGES: Partial<Record<OverseasPage, string>> = {
   uk: imgUk,
+  nz: "/images/nz1.jpg",
   taiwan: imgTaiwan,
   moscow: imgMoscow,
   lebanon: imgLebanon,
@@ -79,6 +80,7 @@ const CARD_IMAGES: Partial<Record<OverseasPage, string>> = {
   poland: imgPoland,
   shanghai: imgShanghai,
   hongkong: imgHongkong,
+  turkey: "/images/turkey1.jpg",
   bangladesh: imgBangladesh,
   czech: imgCzech,
   harbin: imgHarbin,
@@ -151,8 +153,8 @@ export default function OverseasCareer({ onBack, onSelect }: Props) {
                 src={image}
               />
             )}
-            <span className="absolute bg-[rgba(255,255,255,0.6)] bottom-[9px] h-[25.145px] left-[14.81px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] w-[122.444px]" />
-            <span className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold h-[15.474px] justify-center leading-[1.5] left-1/2 text-[12px] text-black text-center top-[117px] tracking-[-0.12px] uppercase whitespace-nowrap">
+            <span className="absolute bg-[rgba(255,255,255,0.6)] bottom-[6px] left-[8px] min-h-[25.145px] rounded-[30px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] w-[135px]" />
+            <span className="-translate-x-1/2 absolute flex items-center justify-center font-['Inter:Bold','Noto_Sans_KR:Bold',sans-serif] font-bold leading-[1.2] left-1/2 text-[10px] text-black text-center bottom-[10px] tracking-[-0.12px] uppercase w-[127px]">
               {OVERSEAS_TITLES[page]}
             </span>
           </button>

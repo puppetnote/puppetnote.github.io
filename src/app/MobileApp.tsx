@@ -51,7 +51,9 @@ const DDKT_SLIDES = [imgDdkt1, imgDdkt2, imgDdkt3, imgDdkt4, imgDdkt5, imgDdkt6,
 const CAMP_SLIDES = imgs("camp", 10);
 const ACADEMY_SLIDES = imgs("academy", 12);
 const CUSTOM_SLIDES = imgsList(["custom1", "custom3", "custom4", "custom5", "custom6", "custom7", "custom8", "custom9"]);
-const UK_SLIDES = imgs("uk", 7);
+const UK_SLIDES = imgs("uk", 14);
+const NZ_SLIDES = imgs("nz", 12);
+const TURKEY_SLIDES = imgs("turkey", 5);
 const TAIWAN_SLIDES = imgs("taiwan", 2);
 const MOSCOW_SLIDES = imgs("moscow", 9);
 const LEBANON_SLIDES = imgs("lebanon", 13);
@@ -164,6 +166,7 @@ const CAROUSEL_CONFIGS: Partial<Record<Page, CarouselConfig>> = {
   gallerycustom:  { ...OB, images: CUSTOM_SLIDES },
   academygallery: { ...OB, images: ACADEMY_SLIDES },
   uk:             { ...OB, images: UK_SLIDES },
+  nz:             { ...OB, images: NZ_SLIDES },
   taiwan:         { ...OB, images: TAIWAN_SLIDES },
   moscow:         { ...OB, images: MOSCOW_SLIDES },
   lebanon:        { ...OB, images: LEBANON_SLIDES },
@@ -172,10 +175,10 @@ const CAROUSEL_CONFIGS: Partial<Record<Page, CarouselConfig>> = {
   poland:         { ...OB, images: POLAND_SLIDES },
   shanghai:       { ...OB, images: SHANGHAI_SLIDES },
   hongkong:       { ...OB, images: HONGKONG_SLIDES },
+  turkey:         { ...OB, images: TURKEY_SLIDES },
   czech:          { ...OB, images: CZECH_SLIDES },
   bangladesh:     { ...OB, images: BANGLADESH_SLIDES },
   harbin:         { ...OB, images: HARBIN_SLIDES },
-  // nz / turkey: 이미지 폴더에 해당 파일 없음 — 플레이스홀더 유지
 };
 
 // ── Home banner carousel ────────────────────────────────────────────────────
@@ -651,6 +654,18 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
     if (page === "puppetcity" || page === "ddkt" || page === "camp") {
       return (
         <>
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              top: 18,
+              left: 6,
+              width: 40,
+              height: 36,
+              background: "#fff",
+              zIndex: 39,
+            }}
+          />
           <button
             type="button"
             onClick={backToPerformance}
@@ -688,6 +703,19 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
     if ((OVERSEAS_PAGES as readonly Page[]).includes(page)) {
       return (
         <>
+          {/* Figma 페이지에 그려진 장식용 화살표를 가리고, 동작하는 화살표만 남긴다. */}
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              top: 18,
+              left: 6,
+              width: 40,
+              height: 36,
+              background: "#fff",
+              zIndex: 39,
+            }}
+          />
           <button
             type="button"
             onClick={backToOverseas}
@@ -909,10 +937,23 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
         .mobile-shell.photo-open [data-name="Banner Container"] {
           opacity: 0.6;
         }
+        /* 오버레이 화살표를 쓰는 상세 페이지에서는 Figma 원본 화살표를 숨긴다 */
+        .mobile-shell.overlay-back [data-name="Vector"] {
+          visibility: hidden !important;
+        }
       `}</style>
 
       <div
-        className={photoOpen ? "mobile-shell photo-open" : "mobile-shell"}
+        className={[
+          "mobile-shell",
+          photoOpen ? "photo-open" : "",
+          (
+            page === "puppetcity" ||
+            page === "ddkt" ||
+            page === "camp" ||
+            (OVERSEAS_PAGES as readonly Page[]).includes(page)
+          ) ? "overlay-back" : "",
+        ].filter(Boolean).join(" ")}
         style={{
           width: "100vw",
           height: "100dvh",

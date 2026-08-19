@@ -214,7 +214,7 @@ function DarkModeSetting8() {
     <div className="absolute bg-[#bfbfbf] border-b border-black border-solid h-[389px] left-[25px] overflow-clip top-[379px] w-[325px]" data-name="Dark Mode Setting">
       <ul className="[word-break:break-word] absolute block font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[0] left-0 not-italic text-[#6a6a6a] text-[12px] top-[11px] whitespace-nowrap">
         <li className="list-disc ms-[18px]">
-          <span className="leading-[normal]">영국</span>
+          <span className="leading-[normal]">영국 프린지 페스티벌</span>
         </li>
       </ul>
       <ul className="[word-break:break-word] absolute block font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[0] left-0 not-italic text-[#6a6a6a] text-[12px] top-[36px] whitespace-nowrap">
