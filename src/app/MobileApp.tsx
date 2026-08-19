@@ -134,7 +134,7 @@ type MenuView =
 const PAGE_HEIGHTS: Record<Page, number> = {
   home: 1540, about: 1400, history: 6500, awards: 2200,
   broadcast: 812, press: 1120, performance: 812,
-  puppetcity: 1450, ddkt: 1300, camp: 2200,
+  puppetcity: 1450, ddkt: 1340, camp: 2200,
   program: 960, career: 960, career1: 2400, career2: 1650,
   // galleryold: 마지막 썸네일이 1836px에서 끝난다 (아래 여백 64px)
   academygallery: 812, gallerycustom: 812, galleryold: 1900, overseas: 1360,

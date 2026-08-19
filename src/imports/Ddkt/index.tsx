@@ -62,6 +62,8 @@ export default function Ddkt() {
           <br aria-hidden />
           체코 세계인형극제 – 최고 연기상 수상!
           <br aria-hidden />
+          국내 인형극 최초 ! 2006 영국프린지페스티벌 한달간 기획공연!
+          <br aria-hidden />
           <br aria-hidden />
           {`엿장수가 극을 이끌어 가는 춤과 노래의 이야기로 아이들과 함께 `}
         </p>
