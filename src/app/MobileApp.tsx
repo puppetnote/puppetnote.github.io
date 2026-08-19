@@ -474,6 +474,29 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
     }
   };
 
+  const copyEmail = async () => {
+    const email = "puppetnote@naver.com";
+    try {
+      await navigator.clipboard.writeText(email);
+      alert("이메일 주소가 복사되었습니다.");
+    } catch {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        alert("이메일 주소가 복사되었습니다.");
+      } catch {
+        alert(email);
+      }
+    }
+  };
+
   // ── Pages ─────────────────────────────────────────────────────────────────
   const renderPage = () => {
     switch (page) {
@@ -835,6 +858,50 @@ export default function MobileApp({ page: pageProp, setPage: setPageProp }: Mobi
           {btn(392, 58, 119, 36, () => window.open("https://map.naver.com/p/directions/-/14106319.378079282,4534598.78464235,%ED%98%84%EB%8C%80%EC%9D%B8%ED%98%95%EA%B7%B9%ED%9A%8C,,/-/transit?", "_blank"))}
           {btn(392, 197, 119, 36, () => window.open("https://naver.me/FgEoAAF5", "_blank"))}
         </>}
+        {page === "news" && (
+          <div
+            style={{
+              position: "absolute",
+              top: 168,
+              left: 24,
+              width: 327,
+              zIndex: 22,
+              textAlign: "center",
+              fontFamily: "Inter, 'Noto Sans KR', sans-serif",
+            }}
+          >
+            <p
+              style={{
+                margin: 0,
+                color: "#626262",
+                fontSize: 13,
+                fontWeight: 500,
+                lineHeight: "22px",
+                whiteSpace: "pre-wrap",
+              }}
+            >
+              {"최신 공연 소식은 문의 또는 이메일로 안내드립니다.\npuppetnote@naver.com"}
+            </p>
+            <button
+              type="button"
+              onClick={copyEmail}
+              style={{
+                marginTop: 24,
+                background: "#ccd9ff",
+                color: "#1a334d",
+                border: "none",
+                borderRadius: 20,
+                padding: "10px 22px",
+                fontFamily: "Inter, 'Noto Sans KR', sans-serif",
+                fontWeight: 600,
+                fontSize: 13,
+                cursor: "pointer",
+              }}
+            >
+              이메일 주소 복사
+            </button>
+          </div>
+        )}
       </>
     );
   };
